@@ -1,0 +1,55 @@
+{
+ "generated": 1780793591,
+ "note": "forward_enabled = CONSIDERATION (gate + WFO majority); live_enabled = ROBUST (full gauntlet). Scoped to each strategy's gate_passing_pairs. Read by ostium_trader (scaffold). ROBUST->live is automatic + money-gate-free by the operator's directive.",
+ "live_enabled": [],
+ "forward_enabled": [
+  {
+   "id": "bollinger_band_bounce",
+   "cadence": "swing",
+   "pairs": [
+    "NATGAS"
+   ],
+   "verdict": "CONSIDERATION"
+  },
+  {
+   "id": "cipher_b_wavetrend_ema",
+   "cadence": "swing",
+   "pairs": [
+    "BCOUSD"
+   ],
+   "verdict": "CONSIDERATION"
+  },
+  {
+   "id": "may_usd_strength_seasonality",
+   "cadence": "day",
+   "pairs": [
+    "WTI"
+   ],
+   "verdict": "CONSIDERATION"
+  },
+  {
+   "id": "rsi_sma200_dual_threshold",
+   "cadence": "swing",
+   "pairs": [
+    "COPPER"
+   ],
+   "verdict": "CONSIDERATION"
+  },
+  {
+   "id": "rsi_stochastic_ma150",
+   "cadence": "swing",
+   "pairs": [
+    "COPPER"
+   ],
+   "verdict": "CONSIDERATION"
+  },
+  {
+   "id": "tall_pattern_height_filter",
+   "cadence": "swing",
+   "pairs": [
+    "BCOUSD"
+   ],
+   "verdict": "CONSIDERATION"
+  }
+ ]
+}

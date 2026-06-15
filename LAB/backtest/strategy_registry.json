@@ -1,0 +1,5927 @@
+{
+ "meta": {
+  "generated": 1780793591,
+  "n_strategies": 7,
+  "official_gate": "PF>=1.2 & net>$100 & maxDD<30% & trades>=30",
+  "pairs": [
+   "EURUSD",
+   "USDJPY",
+   "GBPUSD",
+   "USDCHF",
+   "AUDUSD",
+   "USDCAD",
+   "NZDUSD",
+   "XAUUSD",
+   "XAGUSD",
+   "BCOUSD",
+   "WTI",
+   "COPPER",
+   "NATGAS",
+   "USDMXN"
+  ],
+  "cadences": [
+   "day",
+   "swing"
+  ],
+  "universe_note": "Ostium-tradeable pairs only (EUR/JPY + USD/ZAR excluded -- gTrade-only)",
+  "engine": "3-engine: our Ostium-cost engine (candidate) + vectorbt + backtesting.py (independent confirmation floor, both pooled PF>1)"
+ },
+ "strategies": {
+  "bollinger_band_bounce": {
+   "style": "mean-reversion",
+   "tf": "4h",
+   "indicators": "bb_lo, bb_up, rsi",
+   "long": "prior close below bb_lo, current close back above bb_lo, RSI > 50",
+   "short": "prior close above bb_up, current close back below bb_up, RSI < 50",
+   "desc": "Bollinger Band bounce: pierce-and-return with RSI trend context",
+   "source": "web:https://www.tradingpedia.com/forex-trading-strategies/forex-trading-strategy-relative-strength-index-bollinger-bands/",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 5967,
+      "win_pct": 41.8,
+      "profit_factor": 0.544,
+      "net_usd": -12193.6,
+      "expectancy_R": -0.258,
+      "return_pct": -87.1
+     },
+     "engines": {
+      "ours_pf": 0.544,
+      "vbt_pf": 0.833,
+      "btpy_pf": 0.867,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [],
+      "oos_survived": [],
+      "survival": "0/0",
+      "verdict": "no IS picks"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 34,
+         "profit_factor": 1.301,
+         "net_usd": 46.55,
+         "max_dd_pct": -5.6
+        },
+        "total_folds": 43,
+        "considered_folds": 3,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.67,
+        "verdict": "robust"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 30,
+         "profit_factor": 0.439,
+         "net_usd": -161.67,
+         "max_dd_pct": -19.3
+        },
+        "total_folds": 43,
+        "considered_folds": 4,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 44,
+         "profit_factor": 0.89,
+         "net_usd": -44.22,
+         "max_dd_pct": -12.6
+        },
+        "total_folds": 43,
+        "considered_folds": 4,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "overfit"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 42,
+         "profit_factor": 0.488,
+         "net_usd": -207.54,
+         "max_dd_pct": -22.2
+        },
+        "total_folds": 43,
+        "considered_folds": 3,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 38,
+         "profit_factor": 0.523,
+         "net_usd": -218.86,
+         "max_dd_pct": -23.3
+        },
+        "total_folds": 43,
+        "considered_folds": 5,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.2,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 18,
+         "profit_factor": 0.724,
+         "net_usd": -44.89,
+         "max_dd_pct": -7.1
+        },
+        "total_folds": 40,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 0.153,
+         "net_usd": -86.52,
+         "max_dd_pct": -10.1
+        },
+        "total_folds": 32,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 19,
+         "profit_factor": 0.623,
+         "net_usd": -81.91,
+         "max_dd_pct": -10.1
+        },
+        "total_folds": 32,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 30,
+         "profit_factor": 0.787,
+         "net_usd": -63.47,
+         "max_dd_pct": -9.0
+        },
+        "total_folds": 27,
+        "considered_folds": 2,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "overfit"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 31,
+         "profit_factor": 0.598,
+         "net_usd": -124.38,
+         "max_dd_pct": -16.1
+        },
+        "total_folds": 26,
+        "considered_folds": 3,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 50,
+         "profit_factor": 1.086,
+         "net_usd": 44.19,
+         "max_dd_pct": -12.5
+        },
+        "total_folds": 26,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "promising"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.544,
+       "fee_+25%": 0.522,
+       "fee_+50%": 0.502,
+       "slip_2x": 0.39,
+       "slip_3x": 0.293,
+       "harsh": 0.264
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 557,
+       "win_pct": 46.5,
+       "profit_factor": 0.54,
+       "net_usd": -908.89,
+       "expectancy_R": -0.208,
+       "max_dd_pct": -91.23,
+       "return_pct": -90.89,
+       "vbt_pf": 0.691,
+       "btpy_pf": 0.686,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 341,
+       "win_pct": 45.2,
+       "profit_factor": 0.484,
+       "net_usd": -801.71,
+       "expectancy_R": -0.23,
+       "max_dd_pct": -80.26,
+       "return_pct": -80.17,
+       "vbt_pf": 0.69,
+       "btpy_pf": 0.643,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 571,
+       "win_pct": 46.9,
+       "profit_factor": 0.56,
+       "net_usd": -928.25,
+       "expectancy_R": -0.224,
+       "max_dd_pct": -93.03,
+       "return_pct": -92.83,
+       "vbt_pf": 0.758,
+       "btpy_pf": 0.676,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 586,
+       "win_pct": 43.7,
+       "profit_factor": 0.467,
+       "net_usd": -966.09,
+       "expectancy_R": -0.281,
+       "max_dd_pct": -96.75,
+       "return_pct": -96.61,
+       "vbt_pf": 0.575,
+       "btpy_pf": 0.576,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 355,
+       "win_pct": 43.1,
+       "profit_factor": 0.575,
+       "net_usd": -828.01,
+       "expectancy_R": -0.239,
+       "max_dd_pct": -83.13,
+       "return_pct": -82.8,
+       "vbt_pf": 0.708,
+       "btpy_pf": 0.758,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 603,
+       "win_pct": 43.4,
+       "profit_factor": 0.564,
+       "net_usd": -969.78,
+       "expectancy_R": -0.283,
+       "max_dd_pct": -97.17,
+       "return_pct": -96.98,
+       "vbt_pf": 0.579,
+       "btpy_pf": 0.643,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 294,
+       "win_pct": 43.5,
+       "profit_factor": 0.571,
+       "net_usd": -756.38,
+       "expectancy_R": -0.231,
+       "max_dd_pct": -77.13,
+       "return_pct": -75.64,
+       "vbt_pf": 0.785,
+       "btpy_pf": 0.743,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 365,
+       "win_pct": 32.9,
+       "profit_factor": 0.359,
+       "net_usd": -959.67,
+       "expectancy_R": -0.429,
+       "max_dd_pct": -95.98,
+       "return_pct": -95.97,
+       "vbt_pf": 0.74,
+       "btpy_pf": 0.745,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 367,
+       "win_pct": 35.1,
+       "profit_factor": 0.478,
+       "net_usd": -907.96,
+       "expectancy_R": -0.315,
+       "max_dd_pct": -91.72,
+       "return_pct": -90.8,
+       "vbt_pf": 0.942,
+       "btpy_pf": 0.953,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 275,
+       "win_pct": 36.0,
+       "profit_factor": 0.489,
+       "net_usd": -828.56,
+       "expectancy_R": -0.31,
+       "max_dd_pct": -83.19,
+       "return_pct": -82.86,
+       "vbt_pf": 0.789,
+       "btpy_pf": 0.754,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 417,
+       "win_pct": 41.0,
+       "profit_factor": 0.659,
+       "net_usd": -807.78,
+       "expectancy_R": -0.183,
+       "max_dd_pct": -82.11,
+       "return_pct": -80.78,
+       "vbt_pf": 0.918,
+       "btpy_pf": 1.025,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 238,
+       "win_pct": 36.1,
+       "profit_factor": 0.531,
+       "net_usd": -740.31,
+       "expectancy_R": -0.273,
+       "max_dd_pct": -74.21,
+       "return_pct": -74.03,
+       "vbt_pf": 0.836,
+       "btpy_pf": 0.874,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 542,
+       "win_pct": 40.0,
+       "profit_factor": 0.691,
+       "net_usd": -841.94,
+       "expectancy_R": -0.159,
+       "max_dd_pct": -84.78,
+       "return_pct": -84.19,
+       "vbt_pf": 1.025,
+       "btpy_pf": 1.134,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 456,
+       "win_pct": 42.5,
+       "profit_factor": 0.476,
+       "net_usd": -948.28,
+       "expectancy_R": -0.315,
+       "max_dd_pct": -94.92,
+       "return_pct": -94.83,
+       "vbt_pf": 0.802,
+       "btpy_pf": 0.759,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 842,
+      "win_pct": 39.4,
+      "profit_factor": 0.608,
+      "net_usd": -2547.61,
+      "expectancy_R": -0.178,
+      "return_pct": -18.2
+     },
+     "engines": {
+      "ours_pf": 0.608,
+      "vbt_pf": 1.107,
+      "btpy_pf": 1.086,
+      "agreement": "2/3",
+      "independent_pf>1": "2/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "NATGAS"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "NZDUSD",
+       "WTI",
+       "NATGAS"
+      ],
+      "oos_survived": [
+       "NATGAS"
+      ],
+      "survival": "1/3",
+      "verdict": "OVERFIT"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 5,
+         "profit_factor": 0.097,
+         "net_usd": -47.21,
+         "max_dd_pct": -4.3
+        },
+        "total_folds": 19,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 13,
+         "profit_factor": 0.565,
+         "net_usd": -57.82,
+         "max_dd_pct": -6.0
+        },
+        "total_folds": 19,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "overfit"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 1.149,
+         "net_usd": 9.87,
+         "max_dd_pct": -4.0
+        },
+        "total_folds": 17,
+        "considered_folds": 3,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.67,
+        "verdict": "robust"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 3,
+         "profit_factor": 0.098,
+         "net_usd": -26.33,
+         "max_dd_pct": -2.9
+        },
+        "total_folds": 14,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 13,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 4,
+         "profit_factor": 0.0,
+         "net_usd": -37.97,
+         "max_dd_pct": -3.3
+        },
+        "total_folds": 12,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 1.22,
+         "net_usd": 10.27,
+         "max_dd_pct": -1.3
+        },
+        "total_folds": 11,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "promising"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 3.056,
+         "net_usd": 49.96,
+         "max_dd_pct": -2.1
+        },
+        "total_folds": 10,
+        "considered_folds": 3,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.67,
+        "verdict": "robust"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.608,
+       "fee_+25%": 0.588,
+       "fee_+50%": 0.569,
+       "slip_2x": 0.449,
+       "slip_3x": 0.321,
+       "harsh": 0.293
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "CONSIDERATION",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 71,
+       "win_pct": 39.4,
+       "profit_factor": 0.49,
+       "net_usd": -286.33,
+       "expectancy_R": -0.23,
+       "max_dd_pct": -31.16,
+       "return_pct": -28.63,
+       "vbt_pf": 0.751,
+       "btpy_pf": 0.676,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 71,
+       "win_pct": 29.6,
+       "profit_factor": 0.313,
+       "net_usd": -406.7,
+       "expectancy_R": -0.36,
+       "max_dd_pct": -40.67,
+       "return_pct": -40.67,
+       "vbt_pf": 0.517,
+       "btpy_pf": 0.623,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 78,
+       "win_pct": 38.5,
+       "profit_factor": 0.665,
+       "net_usd": -215.4,
+       "expectancy_R": -0.147,
+       "max_dd_pct": -22.11,
+       "return_pct": -21.54,
+       "vbt_pf": 0.895,
+       "btpy_pf": 0.956,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 93,
+       "win_pct": 30.1,
+       "profit_factor": 0.388,
+       "net_usd": -450.7,
+       "expectancy_R": -0.315,
+       "max_dd_pct": -46.25,
+       "return_pct": -45.07,
+       "vbt_pf": 0.782,
+       "btpy_pf": 0.605,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 67,
+       "win_pct": 40.3,
+       "profit_factor": 0.59,
+       "net_usd": -236.23,
+       "expectancy_R": -0.193,
+       "max_dd_pct": -28.63,
+       "return_pct": -23.62,
+       "vbt_pf": 0.788,
+       "btpy_pf": 0.863,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 82,
+       "win_pct": 35.4,
+       "profit_factor": 0.515,
+       "net_usd": -303.21,
+       "expectancy_R": -0.213,
+       "max_dd_pct": -31.04,
+       "return_pct": -30.32,
+       "vbt_pf": 0.85,
+       "btpy_pf": 0.872,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 56,
+       "win_pct": 50.0,
+       "profit_factor": 1.037,
+       "net_usd": 14.43,
+       "expectancy_R": 0.019,
+       "max_dd_pct": -10.73,
+       "return_pct": 1.44,
+       "vbt_pf": 1.1,
+       "btpy_pf": 1.317,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 48,
+       "win_pct": 41.7,
+       "profit_factor": 0.732,
+       "net_usd": -93.17,
+       "expectancy_R": -0.095,
+       "max_dd_pct": -16.39,
+       "return_pct": -9.32,
+       "vbt_pf": 1.359,
+       "btpy_pf": 1.061,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 56,
+       "win_pct": 32.1,
+       "profit_factor": 0.327,
+       "net_usd": -314.54,
+       "expectancy_R": -0.331,
+       "max_dd_pct": -31.45,
+       "return_pct": -31.45,
+       "vbt_pf": 1.08,
+       "btpy_pf": 0.707,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 44,
+       "win_pct": 34.1,
+       "profit_factor": 0.477,
+       "net_usd": -176.04,
+       "expectancy_R": -0.214,
+       "max_dd_pct": -17.6,
+       "return_pct": -17.6,
+       "vbt_pf": 1.069,
+       "btpy_pf": 0.829,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 44,
+       "win_pct": 50.0,
+       "profit_factor": 1.179,
+       "net_usd": 50.35,
+       "expectancy_R": 0.063,
+       "max_dd_pct": -6.57,
+       "return_pct": 5.03,
+       "vbt_pf": 0.902,
+       "btpy_pf": 1.274,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 47,
+       "win_pct": 42.6,
+       "profit_factor": 0.474,
+       "net_usd": -184.12,
+       "expectancy_R": -0.211,
+       "max_dd_pct": -21.38,
+       "return_pct": -18.41,
+       "vbt_pf": 1.012,
+       "btpy_pf": 1.394,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 40,
+       "win_pct": 67.5,
+       "profit_factor": 2.054,
+       "net_usd": 208.9,
+       "expectancy_R": 0.244,
+       "max_dd_pct": -6.94,
+       "return_pct": 20.89,
+       "vbt_pf": 3.346,
+       "btpy_pf": 2.8,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "USDMXN": {
+       "trades": 45,
+       "win_pct": 42.2,
+       "profit_factor": 0.596,
+       "net_usd": -154.84,
+       "expectancy_R": -0.18,
+       "max_dd_pct": -16.91,
+       "return_pct": -15.48,
+       "vbt_pf": 0.767,
+       "btpy_pf": 0.96,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  },
+  "cipher_b_wavetrend_ema": {
+   "style": "reversal",
+   "tf": "4h",
+   "indicators": "ema50, ema200, wt1, wt2, rsi",
+   "long": "close > EMA50 > EMA200 AND wt1 crosses above wt2 from below 0 AND RSI < 50 (oversold bias)",
+   "short": "close < EMA50 < EMA200 AND wt1 crosses below wt2 from above 0 AND RSI > 50",
+   "desc": "Cipher B WaveTrend oversold cross in EMA bullish/bearish stack",
+   "source": "https://github.com/benso87/Private-Pine-Scripts Cipher B strategy.pine",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 4443,
+      "win_pct": 44.0,
+      "profit_factor": 0.537,
+      "net_usd": -11084.58,
+      "expectancy_R": -0.257,
+      "return_pct": -79.18
+     },
+     "engines": {
+      "ours_pf": 0.537,
+      "vbt_pf": 0.763,
+      "btpy_pf": 0.77,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [],
+      "oos_survived": [],
+      "survival": "0/0",
+      "verdict": "no IS picks"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 16,
+         "profit_factor": 0.526,
+         "net_usd": -67.24,
+         "max_dd_pct": -9.3
+        },
+        "total_folds": 43,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 12,
+         "profit_factor": 0.143,
+         "net_usd": -131.74,
+         "max_dd_pct": -14.9
+        },
+        "total_folds": 43,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 35,
+         "profit_factor": 0.388,
+         "net_usd": -241.94,
+         "max_dd_pct": -23.5
+        },
+        "total_folds": 43,
+        "considered_folds": 3,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 22,
+         "profit_factor": 0.447,
+         "net_usd": -133.89,
+         "max_dd_pct": -16.4
+        },
+        "total_folds": 43,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 36,
+         "profit_factor": 0.901,
+         "net_usd": -28.81,
+         "max_dd_pct": -11.4
+        },
+        "total_folds": 43,
+        "considered_folds": 4,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 35,
+         "profit_factor": 0.357,
+         "net_usd": -215.89,
+         "max_dd_pct": -19.8
+        },
+        "total_folds": 43,
+        "considered_folds": 3,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 33,
+         "profit_factor": 0.712,
+         "net_usd": -89.27,
+         "max_dd_pct": -10.7
+        },
+        "total_folds": 40,
+        "considered_folds": 4,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 6,
+         "profit_factor": 0.282,
+         "net_usd": -68.45,
+         "max_dd_pct": -6.2
+        },
+        "total_folds": 32,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 23,
+         "profit_factor": 0.263,
+         "net_usd": -250.78,
+         "max_dd_pct": -24.8
+        },
+        "total_folds": 32,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 44,
+         "profit_factor": 0.795,
+         "net_usd": -87.07,
+         "max_dd_pct": -14.9
+        },
+        "total_folds": 27,
+        "considered_folds": 5,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.2,
+        "verdict": "overfit"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 0.856,
+         "net_usd": -12.62,
+         "max_dd_pct": -6.0
+        },
+        "total_folds": 26,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 25,
+         "profit_factor": 0.816,
+         "net_usd": -42.62,
+         "max_dd_pct": -15.3
+        },
+        "total_folds": 26,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "overfit"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 0.588,
+         "net_usd": -42.71,
+         "max_dd_pct": -5.8
+        },
+        "total_folds": 29,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.537,
+       "fee_+25%": 0.516,
+       "fee_+50%": 0.496,
+       "slip_2x": 0.395,
+       "slip_3x": 0.293,
+       "harsh": 0.266
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 407,
+       "win_pct": 48.2,
+       "profit_factor": 0.585,
+       "net_usd": -822.65,
+       "expectancy_R": -0.206,
+       "max_dd_pct": -82.86,
+       "return_pct": -82.27,
+       "vbt_pf": 0.639,
+       "btpy_pf": 0.555,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 409,
+       "win_pct": 42.1,
+       "profit_factor": 0.372,
+       "net_usd": -926.35,
+       "expectancy_R": -0.311,
+       "max_dd_pct": -92.71,
+       "return_pct": -92.63,
+       "vbt_pf": 0.557,
+       "btpy_pf": 0.508,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 369,
+       "win_pct": 48.0,
+       "profit_factor": 0.48,
+       "net_usd": -850.79,
+       "expectancy_R": -0.251,
+       "max_dd_pct": -86.01,
+       "return_pct": -85.08,
+       "vbt_pf": 0.636,
+       "btpy_pf": 0.682,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 386,
+       "win_pct": 44.0,
+       "profit_factor": 0.46,
+       "net_usd": -892.96,
+       "expectancy_R": -0.282,
+       "max_dd_pct": -89.56,
+       "return_pct": -89.3,
+       "vbt_pf": 0.625,
+       "btpy_pf": 0.618,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 397,
+       "win_pct": 45.8,
+       "profit_factor": 0.452,
+       "net_usd": -865.36,
+       "expectancy_R": -0.244,
+       "max_dd_pct": -87.18,
+       "return_pct": -86.54,
+       "vbt_pf": 0.714,
+       "btpy_pf": 0.618,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 404,
+       "win_pct": 51.2,
+       "profit_factor": 0.583,
+       "net_usd": -778.49,
+       "expectancy_R": -0.18,
+       "max_dd_pct": -78.34,
+       "return_pct": -77.85,
+       "vbt_pf": 0.651,
+       "btpy_pf": 0.642,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 364,
+       "win_pct": 44.5,
+       "profit_factor": 0.626,
+       "net_usd": -817.94,
+       "expectancy_R": -0.225,
+       "max_dd_pct": -83.9,
+       "return_pct": -81.79,
+       "vbt_pf": 0.749,
+       "btpy_pf": 0.73,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 284,
+       "win_pct": 38.0,
+       "profit_factor": 0.41,
+       "net_usd": -861.26,
+       "expectancy_R": -0.338,
+       "max_dd_pct": -86.13,
+       "return_pct": -86.13,
+       "vbt_pf": 0.767,
+       "btpy_pf": 0.754,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 281,
+       "win_pct": 36.3,
+       "profit_factor": 0.544,
+       "net_usd": -857.39,
+       "expectancy_R": -0.336,
+       "max_dd_pct": -87.77,
+       "return_pct": -85.74,
+       "vbt_pf": 0.783,
+       "btpy_pf": 0.894,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 212,
+       "win_pct": 42.5,
+       "profit_factor": 0.612,
+       "net_usd": -624.71,
+       "expectancy_R": -0.22,
+       "max_dd_pct": -65.7,
+       "return_pct": -62.47,
+       "vbt_pf": 0.973,
+       "btpy_pf": 0.977,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 238,
+       "win_pct": 45.0,
+       "profit_factor": 0.774,
+       "net_usd": -503.44,
+       "expectancy_R": -0.136,
+       "max_dd_pct": -59.38,
+       "return_pct": -50.34,
+       "vbt_pf": 0.904,
+       "btpy_pf": 0.95,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 216,
+       "win_pct": 35.6,
+       "profit_factor": 0.48,
+       "net_usd": -764.42,
+       "expectancy_R": -0.324,
+       "max_dd_pct": -77.03,
+       "return_pct": -76.44,
+       "vbt_pf": 0.669,
+       "btpy_pf": 0.639,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 223,
+       "win_pct": 41.7,
+       "profit_factor": 0.55,
+       "net_usd": -706.68,
+       "expectancy_R": -0.263,
+       "max_dd_pct": -70.69,
+       "return_pct": -70.67,
+       "vbt_pf": 0.856,
+       "btpy_pf": 0.95,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 253,
+       "win_pct": 44.7,
+       "profit_factor": 0.394,
+       "net_usd": -812.13,
+       "expectancy_R": -0.321,
+       "max_dd_pct": -81.68,
+       "return_pct": -81.21,
+       "vbt_pf": 0.745,
+       "btpy_pf": 0.633,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 1161,
+      "win_pct": 36.5,
+      "profit_factor": 0.514,
+      "net_usd": -4442.49,
+      "expectancy_R": -0.245,
+      "return_pct": -31.73
+     },
+     "engines": {
+      "ours_pf": 0.514,
+      "vbt_pf": 0.958,
+      "btpy_pf": 0.938,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "BCOUSD"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "BCOUSD"
+      ],
+      "oos_survived": [
+       "BCOUSD"
+      ],
+      "survival": "1/1",
+      "verdict": "ROBUST"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 9,
+         "profit_factor": 0.151,
+         "net_usd": -98.77,
+         "max_dd_pct": -8.9
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 5,
+         "profit_factor": 0.186,
+         "net_usd": -36.58,
+         "max_dd_pct": -4.2
+        },
+        "total_folds": 19,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 3,
+         "profit_factor": 0.0,
+         "net_usd": -68.68,
+         "max_dd_pct": -4.8
+        },
+        "total_folds": 19,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 17,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 12,
+         "profit_factor": 0.341,
+         "net_usd": -112.98,
+         "max_dd_pct": -12.8
+        },
+        "total_folds": 14,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "overfit"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 12,
+         "profit_factor": 0.081,
+         "net_usd": -146.56,
+         "max_dd_pct": -14.0
+        },
+        "total_folds": 13,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 25,
+         "profit_factor": 1.377,
+         "net_usd": 60.89,
+         "max_dd_pct": -5.2
+        },
+        "total_folds": 12,
+        "considered_folds": 6,
+        "profitable_folds": 4,
+        "profitable_fold_ratio": 0.67,
+        "verdict": "robust"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 24,
+         "profit_factor": 1.093,
+         "net_usd": 16.93,
+         "max_dd_pct": -6.4
+        },
+        "total_folds": 11,
+        "considered_folds": 6,
+        "profitable_folds": 3,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 4,
+         "profit_factor": 0.0,
+         "net_usd": -44.44,
+         "max_dd_pct": -3.6
+        },
+        "total_folds": 11,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 10,
+         "profit_factor": 1.108,
+         "net_usd": 9.17,
+         "max_dd_pct": -6.1
+        },
+        "total_folds": 10,
+        "considered_folds": 2,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.514,
+       "fee_+25%": 0.499,
+       "fee_+50%": 0.484,
+       "slip_2x": 0.37,
+       "slip_3x": 0.265,
+       "harsh": 0.243
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "CONSIDERATION",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 110,
+       "win_pct": 34.5,
+       "profit_factor": 0.5,
+       "net_usd": -420.07,
+       "expectancy_R": -0.24,
+       "max_dd_pct": -42.01,
+       "return_pct": -42.01,
+       "vbt_pf": 0.64,
+       "btpy_pf": 0.696,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 79,
+       "win_pct": 29.1,
+       "profit_factor": 0.272,
+       "net_usd": -468.05,
+       "expectancy_R": -0.392,
+       "max_dd_pct": -47.64,
+       "return_pct": -46.8,
+       "vbt_pf": 0.704,
+       "btpy_pf": 0.763,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 107,
+       "win_pct": 35.5,
+       "profit_factor": 0.462,
+       "net_usd": -447.82,
+       "expectancy_R": -0.271,
+       "max_dd_pct": -47.13,
+       "return_pct": -44.78,
+       "vbt_pf": 0.748,
+       "btpy_pf": 0.771,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 111,
+       "win_pct": 30.6,
+       "profit_factor": 0.322,
+       "net_usd": -515.11,
+       "expectancy_R": -0.32,
+       "max_dd_pct": -51.91,
+       "return_pct": -51.51,
+       "vbt_pf": 0.505,
+       "btpy_pf": 0.471,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 91,
+       "win_pct": 41.8,
+       "profit_factor": 0.601,
+       "net_usd": -293.37,
+       "expectancy_R": -0.183,
+       "max_dd_pct": -30.05,
+       "return_pct": -29.34,
+       "vbt_pf": 1.174,
+       "btpy_pf": 1.129,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 93,
+       "win_pct": 31.2,
+       "profit_factor": 0.253,
+       "net_usd": -542.12,
+       "expectancy_R": -0.413,
+       "max_dd_pct": -54.48,
+       "return_pct": -54.21,
+       "vbt_pf": 0.616,
+       "btpy_pf": 0.575,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 104,
+       "win_pct": 27.9,
+       "profit_factor": 0.302,
+       "net_usd": -513.84,
+       "expectancy_R": -0.34,
+       "max_dd_pct": -51.81,
+       "return_pct": -51.38,
+       "vbt_pf": 1.717,
+       "btpy_pf": 1.769,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 75,
+       "win_pct": 30.7,
+       "profit_factor": 0.433,
+       "net_usd": -378.65,
+       "expectancy_R": -0.309,
+       "max_dd_pct": -39.87,
+       "return_pct": -37.86,
+       "vbt_pf": 0.851,
+       "btpy_pf": 0.751,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 95,
+       "win_pct": 42.1,
+       "profit_factor": 0.734,
+       "net_usd": -191.47,
+       "expectancy_R": -0.105,
+       "max_dd_pct": -27.67,
+       "return_pct": -19.15,
+       "vbt_pf": 1.216,
+       "btpy_pf": 1.244,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 64,
+       "win_pct": 60.9,
+       "profit_factor": 1.508,
+       "net_usd": 188.36,
+       "expectancy_R": 0.142,
+       "max_dd_pct": -6.9,
+       "return_pct": 18.84,
+       "vbt_pf": 1.113,
+       "btpy_pf": 1.168,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "WTI": {
+       "trades": 63,
+       "win_pct": 47.6,
+       "profit_factor": 0.766,
+       "net_usd": -120.25,
+       "expectancy_R": -0.093,
+       "max_dd_pct": -18.72,
+       "return_pct": -12.03,
+       "vbt_pf": 1.263,
+       "btpy_pf": 1.146,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 61,
+       "win_pct": 34.4,
+       "profit_factor": 0.478,
+       "net_usd": -277.83,
+       "expectancy_R": -0.259,
+       "max_dd_pct": -32.86,
+       "return_pct": -27.78,
+       "vbt_pf": 0.706,
+       "btpy_pf": 0.612,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 54,
+       "win_pct": 50.0,
+       "profit_factor": 0.786,
+       "net_usd": -104.63,
+       "expectancy_R": -0.093,
+       "max_dd_pct": -14.35,
+       "return_pct": -10.46,
+       "vbt_pf": 0.804,
+       "btpy_pf": 0.755,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 54,
+       "win_pct": 27.8,
+       "profit_factor": 0.377,
+       "net_usd": -357.64,
+       "expectancy_R": -0.401,
+       "max_dd_pct": -38.73,
+       "return_pct": -35.76,
+       "vbt_pf": 0.989,
+       "btpy_pf": 0.849,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  },
+  "freqtrade_sma_ema_offset_protect": {
+   "style": "revert",
+   "tf": "5m",
+   "indicators": "ema50, ema200, rsi, close",
+   "long": "close < ema50*0.978 AND (ewo>5.835 AND rsi<55) OR ewo < -19.909",
+   "short": "not used (long-only per source)",
+   "desc": "EWO offset protect: buy dip below EMA50 discount with Elliott Wave Oscillator confirm",
+   "source": "https://github.com/thierryjmartin/freqtrade-stuff/blob/main/SMAOffsetProtectOptV1.py",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 147,
+      "win_pct": 51.0,
+      "profit_factor": 0.972,
+      "net_usd": -40.62,
+      "expectancy_R": -0.012,
+      "return_pct": -0.29
+     },
+     "engines": {
+      "ours_pf": 0.972,
+      "vbt_pf": 1.711,
+      "btpy_pf": 1.657,
+      "agreement": "2/3",
+      "independent_pf>1": "2/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "WTI"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "WTI"
+      ],
+      "oos_survived": [],
+      "survival": "0/1",
+      "verdict": "OVERFIT"
+     },
+     "rolling_wfo": {
+      "verdict": "insufficient_history",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 40,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 27,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.972,
+       "fee_+25%": 0.968,
+       "fee_+50%": 0.964,
+       "slip_2x": 0.775,
+       "slip_3x": 0.653,
+       "harsh": 0.644
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 1,
+       "win_pct": 100.0,
+       "profit_factor": null,
+       "net_usd": 25.99,
+       "expectancy_R": 1.3,
+       "max_dd_pct": -0.08,
+       "return_pct": 2.6,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 12,
+       "win_pct": 50.0,
+       "profit_factor": 0.904,
+       "net_usd": -12.55,
+       "expectancy_R": -0.041,
+       "max_dd_pct": -7.25,
+       "return_pct": -1.25,
+       "vbt_pf": 1.327,
+       "btpy_pf": 1.039,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 40,
+       "win_pct": 47.5,
+       "profit_factor": 0.794,
+       "net_usd": -84.87,
+       "expectancy_R": -0.1,
+       "max_dd_pct": -15.07,
+       "return_pct": -8.49,
+       "vbt_pf": 1.279,
+       "btpy_pf": 1.027,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 39,
+       "win_pct": 59.0,
+       "profit_factor": 1.489,
+       "net_usd": 170.0,
+       "expectancy_R": 0.213,
+       "max_dd_pct": -8.57,
+       "return_pct": 17.0,
+       "vbt_pf": 2.637,
+       "btpy_pf": 2.992,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "COPPER": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 55,
+       "win_pct": 47.3,
+       "profit_factor": 0.753,
+       "net_usd": -139.19,
+       "expectancy_R": -0.125,
+       "max_dd_pct": -17.84,
+       "return_pct": -13.92,
+       "vbt_pf": 0.963,
+       "btpy_pf": 0.965,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 363,
+      "win_pct": 44.6,
+      "profit_factor": 0.743,
+      "net_usd": -689.08,
+      "expectancy_R": -0.107,
+      "return_pct": -4.92
+     },
+     "engines": {
+      "ours_pf": 0.743,
+      "vbt_pf": 0.94,
+      "btpy_pf": 0.983,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [],
+      "oos_survived": [],
+      "survival": "0/0",
+      "verdict": "no IS picks"
+     },
+     "rolling_wfo": {
+      "verdict": "insufficient_history",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 17,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 14,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 13,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 10,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.743,
+       "fee_+25%": 0.739,
+       "fee_+50%": 0.736,
+       "slip_2x": 0.629,
+       "slip_3x": 0.502,
+       "harsh": 0.491
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 1,
+       "win_pct": 100.0,
+       "profit_factor": null,
+       "net_usd": 2.78,
+       "expectancy_R": 0.139,
+       "max_dd_pct": -1.27,
+       "return_pct": 0.28,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 6,
+       "win_pct": 50.0,
+       "profit_factor": 0.941,
+       "net_usd": -3.81,
+       "expectancy_R": -0.02,
+       "max_dd_pct": -4.49,
+       "return_pct": -0.38,
+       "vbt_pf": 0.67,
+       "btpy_pf": 0.725,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 32,
+       "win_pct": 40.6,
+       "profit_factor": 0.575,
+       "net_usd": -104.58,
+       "expectancy_R": -0.166,
+       "max_dd_pct": -14.69,
+       "return_pct": -10.46,
+       "vbt_pf": 0.713,
+       "btpy_pf": 0.961,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 66,
+       "win_pct": 51.5,
+       "profit_factor": 0.932,
+       "net_usd": -35.34,
+       "expectancy_R": -0.019,
+       "max_dd_pct": -19.74,
+       "return_pct": -3.53,
+       "vbt_pf": 1.046,
+       "btpy_pf": 1.348,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 69,
+       "win_pct": 44.9,
+       "profit_factor": 0.752,
+       "net_usd": -122.04,
+       "expectancy_R": -0.088,
+       "max_dd_pct": -23.81,
+       "return_pct": -12.2,
+       "vbt_pf": 1.273,
+       "btpy_pf": 0.959,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 2,
+       "win_pct": 50.0,
+       "profit_factor": 0.037,
+       "net_usd": -9.57,
+       "expectancy_R": -0.239,
+       "max_dd_pct": -2.78,
+       "return_pct": -0.96,
+       "vbt_pf": 1.282,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 185,
+       "win_pct": 42.2,
+       "profit_factor": 0.686,
+       "net_usd": -422.27,
+       "expectancy_R": -0.141,
+       "max_dd_pct": -46.1,
+       "return_pct": -42.23,
+       "vbt_pf": 0.76,
+       "btpy_pf": 0.881,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 2,
+       "win_pct": 50.0,
+       "profit_factor": 4.651,
+       "net_usd": 5.74,
+       "expectancy_R": 0.144,
+       "max_dd_pct": -1.32,
+       "return_pct": 0.57,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  },
+  "may_usd_strength_seasonality": {
+   "style": "seasonal",
+   "tf": "1d",
+   "indicators": "open_time,tdm",
+   "long": "not used (USD-strength bias means short AUD/NZD; long side would be USD pairs)",
+   "short": "first trading day of May (AUD/USD, NZD/USD tend to fall in May - USD strength)",
+   "desc": "May USD-strength seasonal: short AUD/USD and NZD/USD at May open, hold through month",
+   "source": "day_trading_swing_trading_the_currency_market_tech Ch.7 Other Cases of Seasonality May Figs 7.6-7.7",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 557,
+      "win_pct": 46.7,
+      "profit_factor": 0.662,
+      "net_usd": -2024.45,
+      "expectancy_R": -0.204,
+      "return_pct": -14.46
+     },
+     "engines": {
+      "ours_pf": 0.662,
+      "vbt_pf": 0.933,
+      "btpy_pf": 0.968,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "WTI"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "WTI"
+      ],
+      "oos_survived": [
+       "WTI"
+      ],
+      "survival": "1/1",
+      "verdict": "ROBUST"
+     },
+     "rolling_wfo": {
+      "verdict": "insufficient_history",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 39,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 27,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 25,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.662,
+       "fee_+25%": 0.643,
+       "fee_+50%": 0.624,
+       "slip_2x": 0.538,
+       "slip_3x": 0.439,
+       "harsh": 0.401
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "CONSIDERATION",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 39,
+       "win_pct": 56.4,
+       "profit_factor": 0.871,
+       "net_usd": -48.7,
+       "expectancy_R": -0.054,
+       "max_dd_pct": -10.55,
+       "return_pct": -4.87,
+       "vbt_pf": 0.585,
+       "btpy_pf": 0.972,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 48,
+       "win_pct": 31.2,
+       "profit_factor": 0.311,
+       "net_usd": -403.93,
+       "expectancy_R": -0.528,
+       "max_dd_pct": -43.6,
+       "return_pct": -40.39,
+       "vbt_pf": 0.599,
+       "btpy_pf": 0.448,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 40,
+       "win_pct": 57.5,
+       "profit_factor": 0.861,
+       "net_usd": -54.04,
+       "expectancy_R": -0.059,
+       "max_dd_pct": -9.13,
+       "return_pct": -5.4,
+       "vbt_pf": 1.308,
+       "btpy_pf": 1.547,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 38,
+       "win_pct": 34.2,
+       "profit_factor": 0.26,
+       "net_usd": -346.93,
+       "expectancy_R": -0.549,
+       "max_dd_pct": -36.25,
+       "return_pct": -34.69,
+       "vbt_pf": 0.698,
+       "btpy_pf": 0.614,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 42,
+       "win_pct": 50.0,
+       "profit_factor": 0.766,
+       "net_usd": -99.48,
+       "expectancy_R": -0.114,
+       "max_dd_pct": -17.2,
+       "return_pct": -9.95,
+       "vbt_pf": 0.891,
+       "btpy_pf": 0.938,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 38,
+       "win_pct": 42.1,
+       "profit_factor": 0.467,
+       "net_usd": -252.02,
+       "expectancy_R": -0.371,
+       "max_dd_pct": -30.46,
+       "return_pct": -25.2,
+       "vbt_pf": 0.637,
+       "btpy_pf": 0.704,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 41,
+       "win_pct": 48.8,
+       "profit_factor": 0.636,
+       "net_usd": -156.99,
+       "expectancy_R": -0.198,
+       "max_dd_pct": -19.54,
+       "return_pct": -15.7,
+       "vbt_pf": 0.804,
+       "btpy_pf": 0.633,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 45,
+       "win_pct": 44.4,
+       "profit_factor": 0.713,
+       "net_usd": -128.88,
+       "expectancy_R": -0.142,
+       "max_dd_pct": -16.57,
+       "return_pct": -12.89,
+       "vbt_pf": 0.733,
+       "btpy_pf": 1.005,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 40,
+       "win_pct": 47.5,
+       "profit_factor": 0.577,
+       "net_usd": -197.19,
+       "expectancy_R": -0.26,
+       "max_dd_pct": -23.02,
+       "return_pct": -19.72,
+       "vbt_pf": 0.696,
+       "btpy_pf": 0.882,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 44,
+       "win_pct": 54.5,
+       "profit_factor": 1.051,
+       "net_usd": 21.63,
+       "expectancy_R": 0.037,
+       "max_dd_pct": -10.78,
+       "return_pct": 2.16,
+       "vbt_pf": 1.218,
+       "btpy_pf": 1.478,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 35,
+       "win_pct": 57.1,
+       "profit_factor": 1.653,
+       "net_usd": 175.58,
+       "expectancy_R": 0.244,
+       "max_dd_pct": -7.19,
+       "return_pct": 17.56,
+       "vbt_pf": 1.575,
+       "btpy_pf": 1.628,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "COPPER": {
+       "trades": 41,
+       "win_pct": 53.7,
+       "profit_factor": 0.86,
+       "net_usd": -58.49,
+       "expectancy_R": -0.061,
+       "max_dd_pct": -16.39,
+       "return_pct": -5.85,
+       "vbt_pf": 1.017,
+       "btpy_pf": 1.499,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 33,
+       "win_pct": 39.4,
+       "profit_factor": 0.554,
+       "net_usd": -168.11,
+       "expectancy_R": -0.268,
+       "max_dd_pct": -23.73,
+       "return_pct": -16.81,
+       "vbt_pf": 0.951,
+       "btpy_pf": 0.481,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 33,
+       "win_pct": 36.4,
+       "profit_factor": 0.278,
+       "net_usd": -306.9,
+       "expectancy_R": -0.544,
+       "max_dd_pct": -30.69,
+       "return_pct": -30.69,
+       "vbt_pf": 1.049,
+       "btpy_pf": 0.837,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 353,
+      "win_pct": 50.4,
+      "profit_factor": 0.67,
+      "net_usd": -1215.3,
+      "expectancy_R": -0.178,
+      "return_pct": -8.68
+     },
+     "engines": {
+      "ours_pf": 0.67,
+      "vbt_pf": 0.947,
+      "btpy_pf": 1.015,
+      "agreement": "1/3",
+      "independent_pf>1": "1/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [],
+      "oos_survived": [],
+      "survival": "0/0",
+      "verdict": "no IS picks"
+     },
+     "rolling_wfo": {
+      "verdict": "insufficient_history",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 17,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 14,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 13,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 10,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.67,
+       "fee_+25%": 0.656,
+       "fee_+50%": 0.643,
+       "slip_2x": 0.539,
+       "slip_3x": 0.433,
+       "harsh": 0.394
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 29,
+       "win_pct": 44.8,
+       "profit_factor": 0.419,
+       "net_usd": -169.95,
+       "expectancy_R": -0.313,
+       "max_dd_pct": -19.66,
+       "return_pct": -17.0,
+       "vbt_pf": 1.329,
+       "btpy_pf": 0.8,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 30,
+       "win_pct": 46.7,
+       "profit_factor": 0.795,
+       "net_usd": -67.51,
+       "expectancy_R": -0.103,
+       "max_dd_pct": -20.53,
+       "return_pct": -6.75,
+       "vbt_pf": 0.904,
+       "btpy_pf": 0.952,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 29,
+       "win_pct": 55.2,
+       "profit_factor": 0.671,
+       "net_usd": -94.9,
+       "expectancy_R": -0.163,
+       "max_dd_pct": -12.23,
+       "return_pct": -9.49,
+       "vbt_pf": 1.754,
+       "btpy_pf": 1.633,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 30,
+       "win_pct": 46.7,
+       "profit_factor": 0.521,
+       "net_usd": -156.12,
+       "expectancy_R": -0.273,
+       "max_dd_pct": -22.8,
+       "return_pct": -15.61,
+       "vbt_pf": 0.92,
+       "btpy_pf": 0.9,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 28,
+       "win_pct": 60.7,
+       "profit_factor": 1.01,
+       "net_usd": 2.48,
+       "expectancy_R": 0.015,
+       "max_dd_pct": -14.15,
+       "return_pct": 0.25,
+       "vbt_pf": 0.599,
+       "btpy_pf": 0.755,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 30,
+       "win_pct": 46.7,
+       "profit_factor": 0.63,
+       "net_usd": -127.25,
+       "expectancy_R": -0.216,
+       "max_dd_pct": -20.02,
+       "return_pct": -12.72,
+       "vbt_pf": 0.68,
+       "btpy_pf": 0.8,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 25,
+       "win_pct": 44.0,
+       "profit_factor": 0.39,
+       "net_usd": -178.22,
+       "expectancy_R": -0.384,
+       "max_dd_pct": -19.68,
+       "return_pct": -17.82,
+       "vbt_pf": 1.581,
+       "btpy_pf": 1.13,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 23,
+       "win_pct": 47.8,
+       "profit_factor": 0.442,
+       "net_usd": -140.65,
+       "expectancy_R": -0.32,
+       "max_dd_pct": -15.89,
+       "return_pct": -14.06,
+       "vbt_pf": 0.629,
+       "btpy_pf": 0.542,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 24,
+       "win_pct": 45.8,
+       "profit_factor": 0.462,
+       "net_usd": -154.97,
+       "expectancy_R": -0.339,
+       "max_dd_pct": -16.77,
+       "return_pct": -15.5,
+       "vbt_pf": 0.707,
+       "btpy_pf": 0.599,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 22,
+       "win_pct": 63.6,
+       "profit_factor": 1.086,
+       "net_usd": 15.42,
+       "expectancy_R": 0.044,
+       "max_dd_pct": -9.16,
+       "return_pct": 1.54,
+       "vbt_pf": 1.089,
+       "btpy_pf": 1.691,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 20,
+       "win_pct": 70.0,
+       "profit_factor": 1.742,
+       "net_usd": 101.85,
+       "expectancy_R": 0.254,
+       "max_dd_pct": -5.99,
+       "return_pct": 10.18,
+       "vbt_pf": 0.871,
+       "btpy_pf": 1.013,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 21,
+       "win_pct": 57.1,
+       "profit_factor": 1.092,
+       "net_usd": 18.7,
+       "expectancy_R": 0.057,
+       "max_dd_pct": -7.07,
+       "return_pct": 1.87,
+       "vbt_pf": 1.068,
+       "btpy_pf": 1.687,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 19,
+       "win_pct": 36.8,
+       "profit_factor": 0.499,
+       "net_usd": -124.03,
+       "expectancy_R": -0.336,
+       "max_dd_pct": -13.44,
+       "return_pct": -12.4,
+       "vbt_pf": 1.043,
+       "btpy_pf": 0.873,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 23,
+       "win_pct": 43.5,
+       "profit_factor": 0.436,
+       "net_usd": -140.15,
+       "expectancy_R": -0.319,
+       "max_dd_pct": -20.06,
+       "return_pct": -14.02,
+       "vbt_pf": 0.941,
+       "btpy_pf": 1.462,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  },
+  "rsi_sma200_dual_threshold": {
+   "style": "mean-reversion",
+   "tf": "1d",
+   "indicators": "rsi, sma200, close",
+   "long": "RSI < 30 (oversold) AND close > sma200 (uptrend)",
+   "short": "RSI > 70 (overbought) AND close < sma200 (downtrend)",
+   "desc": "RSI dual-threshold mean reversion with SMA200 trend gate",
+   "source": "FMZQuant/Larry Connors RSI mean reversion (medium.com/@FMZQuant); DataCamp Python implementation",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 5196,
+      "win_pct": 43.5,
+      "profit_factor": 0.561,
+      "net_usd": -11657.23,
+      "expectancy_R": -0.248,
+      "return_pct": -83.27
+     },
+     "engines": {
+      "ours_pf": 0.561,
+      "vbt_pf": 0.792,
+      "btpy_pf": 0.821,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [],
+      "oos_survived": [],
+      "survival": "0/0",
+      "verdict": "no IS picks"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 41,
+         "profit_factor": 0.849,
+         "net_usd": -46.0,
+         "max_dd_pct": -11.6
+        },
+        "total_folds": 43,
+        "considered_folds": 4,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 0.871,
+         "net_usd": -9.28,
+         "max_dd_pct": -4.6
+        },
+        "total_folds": 43,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 55,
+         "profit_factor": 1.109,
+         "net_usd": 45.75,
+         "max_dd_pct": -12.5
+        },
+        "total_folds": 43,
+        "considered_folds": 5,
+        "profitable_folds": 4,
+        "profitable_fold_ratio": 0.8,
+        "verdict": "robust"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 18,
+         "profit_factor": 0.488,
+         "net_usd": -98.36,
+         "max_dd_pct": -11.1
+        },
+        "total_folds": 43,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "overfit"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 70,
+         "profit_factor": 0.564,
+         "net_usd": -334.7,
+         "max_dd_pct": -35.4
+        },
+        "total_folds": 43,
+        "considered_folds": 9,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.22,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 71,
+         "profit_factor": 0.483,
+         "net_usd": -360.65,
+         "max_dd_pct": -36.2
+        },
+        "total_folds": 43,
+        "considered_folds": 8,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 31,
+         "profit_factor": 0.572,
+         "net_usd": -149.95,
+         "max_dd_pct": -14.6
+        },
+        "total_folds": 40,
+        "considered_folds": 4,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 37,
+         "profit_factor": 1.041,
+         "net_usd": 14.55,
+         "max_dd_pct": -10.0
+        },
+        "total_folds": 32,
+        "considered_folds": 5,
+        "profitable_folds": 4,
+        "profitable_fold_ratio": 0.8,
+        "verdict": "promising"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 50,
+         "profit_factor": 0.69,
+         "net_usd": -197.92,
+         "max_dd_pct": -20.8
+        },
+        "total_folds": 29,
+        "considered_folds": 4,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 9,
+         "profit_factor": 0.528,
+         "net_usd": -60.72,
+         "max_dd_pct": -8.5
+        },
+        "total_folds": 27,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 12,
+         "profit_factor": 0.245,
+         "net_usd": -151.1,
+         "max_dd_pct": -15.4
+        },
+        "total_folds": 26,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 17,
+         "profit_factor": 0.321,
+         "net_usd": -155.71,
+         "max_dd_pct": -13.4
+        },
+        "total_folds": 29,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "overfit"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.561,
+       "fee_+25%": 0.541,
+       "fee_+50%": 0.521,
+       "slip_2x": 0.423,
+       "slip_3x": 0.326,
+       "harsh": 0.298
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 434,
+       "win_pct": 49.3,
+       "profit_factor": 0.581,
+       "net_usd": -822.7,
+       "expectancy_R": -0.192,
+       "max_dd_pct": -83.06,
+       "return_pct": -82.27,
+       "vbt_pf": 0.767,
+       "btpy_pf": 0.709,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 420,
+       "win_pct": 43.6,
+       "profit_factor": 0.496,
+       "net_usd": -911.18,
+       "expectancy_R": -0.28,
+       "max_dd_pct": -91.54,
+       "return_pct": -91.12,
+       "vbt_pf": 0.594,
+       "btpy_pf": 0.652,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 472,
+       "win_pct": 48.3,
+       "profit_factor": 0.548,
+       "net_usd": -857.39,
+       "expectancy_R": -0.199,
+       "max_dd_pct": -85.9,
+       "return_pct": -85.74,
+       "vbt_pf": 0.7,
+       "btpy_pf": 0.689,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 393,
+       "win_pct": 49.4,
+       "profit_factor": 0.572,
+       "net_usd": -834.42,
+       "expectancy_R": -0.217,
+       "max_dd_pct": -83.71,
+       "return_pct": -83.44,
+       "vbt_pf": 0.763,
+       "btpy_pf": 0.754,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 358,
+       "win_pct": 46.6,
+       "profit_factor": 0.589,
+       "net_usd": -793.7,
+       "expectancy_R": -0.211,
+       "max_dd_pct": -82.02,
+       "return_pct": -79.37,
+       "vbt_pf": 0.848,
+       "btpy_pf": 0.762,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 367,
+       "win_pct": 48.8,
+       "profit_factor": 0.655,
+       "net_usd": -732.86,
+       "expectancy_R": -0.173,
+       "max_dd_pct": -75.99,
+       "return_pct": -73.29,
+       "vbt_pf": 0.663,
+       "btpy_pf": 0.672,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 338,
+       "win_pct": 42.6,
+       "profit_factor": 0.543,
+       "net_usd": -826.73,
+       "expectancy_R": -0.25,
+       "max_dd_pct": -83.85,
+       "return_pct": -82.67,
+       "vbt_pf": 0.666,
+       "btpy_pf": 0.674,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 372,
+       "win_pct": 41.4,
+       "profit_factor": 0.466,
+       "net_usd": -916.02,
+       "expectancy_R": -0.322,
+       "max_dd_pct": -92.32,
+       "return_pct": -91.6,
+       "vbt_pf": 0.8,
+       "btpy_pf": 0.816,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 323,
+       "win_pct": 40.6,
+       "profit_factor": 0.583,
+       "net_usd": -807.76,
+       "expectancy_R": -0.244,
+       "max_dd_pct": -82.34,
+       "return_pct": -80.78,
+       "vbt_pf": 0.946,
+       "btpy_pf": 0.91,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 307,
+       "win_pct": 42.0,
+       "profit_factor": 0.714,
+       "net_usd": -663.97,
+       "expectancy_R": -0.166,
+       "max_dd_pct": -68.69,
+       "return_pct": -66.4,
+       "vbt_pf": 0.862,
+       "btpy_pf": 0.993,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 417,
+       "win_pct": 36.5,
+       "profit_factor": 0.475,
+       "net_usd": -922.04,
+       "expectancy_R": -0.295,
+       "max_dd_pct": -92.69,
+       "return_pct": -92.2,
+       "vbt_pf": 0.848,
+       "btpy_pf": 0.852,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 268,
+       "win_pct": 40.7,
+       "profit_factor": 0.598,
+       "net_usd": -715.11,
+       "expectancy_R": -0.224,
+       "max_dd_pct": -72.91,
+       "return_pct": -71.51,
+       "vbt_pf": 0.92,
+       "btpy_pf": 1.037,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 457,
+       "win_pct": 38.1,
+       "profit_factor": 0.59,
+       "net_usd": -925.33,
+       "expectancy_R": -0.269,
+       "max_dd_pct": -92.84,
+       "return_pct": -92.61,
+       "vbt_pf": 0.778,
+       "btpy_pf": 0.871,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 270,
+       "win_pct": 37.0,
+       "profit_factor": 0.305,
+       "net_usd": -928.02,
+       "expectancy_R": -0.476,
+       "max_dd_pct": -93.61,
+       "return_pct": -92.8,
+       "vbt_pf": 0.588,
+       "btpy_pf": 0.519,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 1596,
+      "win_pct": 39.9,
+      "profit_factor": 0.564,
+      "net_usd": -4993.93,
+      "expectancy_R": -0.196,
+      "return_pct": -35.67
+     },
+     "engines": {
+      "ours_pf": 0.564,
+      "vbt_pf": 0.859,
+      "btpy_pf": 1.034,
+      "agreement": "1/3",
+      "independent_pf>1": "1/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "COPPER"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "COPPER"
+      ],
+      "oos_survived": [
+       "COPPER"
+      ],
+      "survival": "1/1",
+      "verdict": "ROBUST"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 6,
+         "profit_factor": 0.579,
+         "net_usd": -24.35,
+         "max_dd_pct": -5.6
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 23,
+         "profit_factor": 0.483,
+         "net_usd": -121.16,
+         "max_dd_pct": -12.8
+        },
+        "total_folds": 19,
+        "considered_folds": 4,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 25,
+         "profit_factor": 1.109,
+         "net_usd": 19.08,
+         "max_dd_pct": -3.9
+        },
+        "total_folds": 19,
+        "considered_folds": 4,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 0.079,
+         "net_usd": -92.14,
+         "max_dd_pct": -7.6
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 0.234,
+         "net_usd": -54.9,
+         "max_dd_pct": -4.5
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 1.183,
+         "net_usd": 6.63,
+         "max_dd_pct": -2.0
+        },
+        "total_folds": 17,
+        "considered_folds": 2,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 14,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 13,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 18,
+         "profit_factor": 0.35,
+         "net_usd": -120.95,
+         "max_dd_pct": -10.7
+        },
+        "total_folds": 11,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 10,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 13,
+         "profit_factor": 0.406,
+         "net_usd": -80.45,
+         "max_dd_pct": -10.8
+        },
+        "total_folds": 12,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.564,
+       "fee_+25%": 0.547,
+       "fee_+50%": 0.53,
+       "slip_2x": 0.407,
+       "slip_3x": 0.293,
+       "harsh": 0.27
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "CONSIDERATION",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 139,
+       "win_pct": 42.4,
+       "profit_factor": 0.558,
+       "net_usd": -379.99,
+       "expectancy_R": -0.166,
+       "max_dd_pct": -41.44,
+       "return_pct": -38.0,
+       "vbt_pf": 1.096,
+       "btpy_pf": 1.022,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 128,
+       "win_pct": 45.3,
+       "profit_factor": 0.719,
+       "net_usd": -267.02,
+       "expectancy_R": -0.114,
+       "max_dd_pct": -35.18,
+       "return_pct": -26.7,
+       "vbt_pf": 1.199,
+       "btpy_pf": 1.224,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 140,
+       "win_pct": 40.7,
+       "profit_factor": 0.598,
+       "net_usd": -401.31,
+       "expectancy_R": -0.177,
+       "max_dd_pct": -42.25,
+       "return_pct": -40.13,
+       "vbt_pf": 1.027,
+       "btpy_pf": 1.085,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 129,
+       "win_pct": 34.9,
+       "profit_factor": 0.444,
+       "net_usd": -512.73,
+       "expectancy_R": -0.271,
+       "max_dd_pct": -52.26,
+       "return_pct": -51.27,
+       "vbt_pf": 0.741,
+       "btpy_pf": 0.798,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 107,
+       "win_pct": 34.6,
+       "profit_factor": 0.426,
+       "net_usd": -427.97,
+       "expectancy_R": -0.254,
+       "max_dd_pct": -42.8,
+       "return_pct": -42.8,
+       "vbt_pf": 0.578,
+       "btpy_pf": 3.187,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 133,
+       "win_pct": 42.9,
+       "profit_factor": 0.527,
+       "net_usd": -391.63,
+       "expectancy_R": -0.181,
+       "max_dd_pct": -40.83,
+       "return_pct": -39.16,
+       "vbt_pf": 0.994,
+       "btpy_pf": 0.868,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 102,
+       "win_pct": 41.2,
+       "profit_factor": 0.656,
+       "net_usd": -275.43,
+       "expectancy_R": -0.15,
+       "max_dd_pct": -33.19,
+       "return_pct": -27.54,
+       "vbt_pf": 0.995,
+       "btpy_pf": 0.851,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 119,
+       "win_pct": 38.7,
+       "profit_factor": 0.494,
+       "net_usd": -446.57,
+       "expectancy_R": -0.242,
+       "max_dd_pct": -48.39,
+       "return_pct": -44.66,
+       "vbt_pf": 0.976,
+       "btpy_pf": 1.036,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 125,
+       "win_pct": 32.8,
+       "profit_factor": 0.465,
+       "net_usd": -473.54,
+       "expectancy_R": -0.25,
+       "max_dd_pct": -47.99,
+       "return_pct": -47.35,
+       "vbt_pf": 0.698,
+       "btpy_pf": 0.664,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 99,
+       "win_pct": 41.4,
+       "profit_factor": 0.54,
+       "net_usd": -347.44,
+       "expectancy_R": -0.208,
+       "max_dd_pct": -39.1,
+       "return_pct": -34.74,
+       "vbt_pf": 0.883,
+       "btpy_pf": 0.892,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 110,
+       "win_pct": 33.6,
+       "profit_factor": 0.41,
+       "net_usd": -479.98,
+       "expectancy_R": -0.29,
+       "max_dd_pct": -52.0,
+       "return_pct": -48.0,
+       "vbt_pf": 0.915,
+       "btpy_pf": 0.983,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 69,
+       "win_pct": 53.6,
+       "profit_factor": 1.244,
+       "net_usd": 113.06,
+       "expectancy_R": 0.085,
+       "max_dd_pct": -11.43,
+       "return_pct": 11.31,
+       "vbt_pf": 1.106,
+       "btpy_pf": 1.397,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "NATGAS": {
+       "trades": 101,
+       "win_pct": 44.6,
+       "profit_factor": 0.658,
+       "net_usd": -274.33,
+       "expectancy_R": -0.151,
+       "max_dd_pct": -30.07,
+       "return_pct": -27.43,
+       "vbt_pf": 0.637,
+       "btpy_pf": 0.712,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 95,
+       "win_pct": 36.8,
+       "profit_factor": 0.431,
+       "net_usd": -429.05,
+       "expectancy_R": -0.286,
+       "max_dd_pct": -46.24,
+       "return_pct": -42.9,
+       "vbt_pf": 1.024,
+       "btpy_pf": 1.002,
+       "indep_confirmed": true,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  },
+  "rsi_stochastic_ma150": {
+   "style": "revert",
+   "tf": "1h",
+   "indicators": "sma200, rsi, stoch_k, close",
+   "long": "close > sma200 AND rsi < 30 AND stoch_k < 30",
+   "short": "close < sma200 AND rsi > 70 AND stoch_k > 70",
+   "desc": "SMA200 trend + RSI + Stochastic pullback mean-reversion; proxy for MA150/RSI3 original",
+   "source": "web:https://www.mql5.com/en/code/18671",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 4985,
+      "win_pct": 43.6,
+      "profit_factor": 0.561,
+      "net_usd": -11522.28,
+      "expectancy_R": -0.248,
+      "return_pct": -82.3
+     },
+     "engines": {
+      "ours_pf": 0.561,
+      "vbt_pf": 0.788,
+      "btpy_pf": 0.823,
+      "agreement": "0/3",
+      "independent_pf>1": "0/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [],
+      "oos_survived": [],
+      "survival": "0/0",
+      "verdict": "no IS picks"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 17,
+         "profit_factor": 1.112,
+         "net_usd": 15.67,
+         "max_dd_pct": -6.6
+        },
+        "total_folds": 43,
+        "considered_folds": 2,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 20,
+         "profit_factor": 0.692,
+         "net_usd": -62.53,
+         "max_dd_pct": -6.8
+        },
+        "total_folds": 43,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 63,
+         "profit_factor": 0.997,
+         "net_usd": -1.58,
+         "max_dd_pct": -16.8
+        },
+        "total_folds": 43,
+        "considered_folds": 6,
+        "profitable_folds": 4,
+        "profitable_fold_ratio": 0.67,
+        "verdict": "overfit"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 13,
+         "profit_factor": 0.298,
+         "net_usd": -98.48,
+         "max_dd_pct": -10.8
+        },
+        "total_folds": 43,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 76,
+         "profit_factor": 0.618,
+         "net_usd": -308.57,
+         "max_dd_pct": -32.9
+        },
+        "total_folds": 43,
+        "considered_folds": 10,
+        "profitable_folds": 3,
+        "profitable_fold_ratio": 0.3,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 68,
+         "profit_factor": 0.476,
+         "net_usd": -360.38,
+         "max_dd_pct": -36.1
+        },
+        "total_folds": 43,
+        "considered_folds": 8,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.25,
+        "verdict": "overfit"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 19,
+         "profit_factor": 0.46,
+         "net_usd": -138.66,
+         "max_dd_pct": -13.4
+        },
+        "total_folds": 40,
+        "considered_folds": 3,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 10,
+         "profit_factor": 0.494,
+         "net_usd": -62.58,
+         "max_dd_pct": -12.1
+        },
+        "total_folds": 32,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 32,
+         "profit_factor": 1.115,
+         "net_usd": 35.15,
+         "max_dd_pct": -7.9
+        },
+        "total_folds": 32,
+        "considered_folds": 5,
+        "profitable_folds": 3,
+        "profitable_fold_ratio": 0.6,
+        "verdict": "robust"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 37,
+         "profit_factor": 0.554,
+         "net_usd": -222.86,
+         "max_dd_pct": -22.6
+        },
+        "total_folds": 29,
+        "considered_folds": 3,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 17,
+         "profit_factor": 1.086,
+         "net_usd": 13.21,
+         "max_dd_pct": -11.5
+        },
+        "total_folds": 27,
+        "considered_folds": 2,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 25,
+         "profit_factor": 0.295,
+         "net_usd": -263.09,
+         "max_dd_pct": -26.5
+        },
+        "total_folds": 26,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 9,
+         "profit_factor": 0.237,
+         "net_usd": -98.95,
+         "max_dd_pct": -11.5
+        },
+        "total_folds": 29,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.561,
+       "fee_+25%": 0.54,
+       "fee_+50%": 0.521,
+       "slip_2x": 0.424,
+       "slip_3x": 0.324,
+       "harsh": 0.296
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 417,
+       "win_pct": 49.9,
+       "profit_factor": 0.598,
+       "net_usd": -798.52,
+       "expectancy_R": -0.185,
+       "max_dd_pct": -80.78,
+       "return_pct": -79.85,
+       "vbt_pf": 0.792,
+       "btpy_pf": 0.722,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 400,
+       "win_pct": 43.0,
+       "profit_factor": 0.481,
+       "net_usd": -911.57,
+       "expectancy_R": -0.295,
+       "max_dd_pct": -91.77,
+       "return_pct": -91.16,
+       "vbt_pf": 0.568,
+       "btpy_pf": 0.623,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 454,
+       "win_pct": 48.5,
+       "profit_factor": 0.556,
+       "net_usd": -838.34,
+       "expectancy_R": -0.193,
+       "max_dd_pct": -84.01,
+       "return_pct": -83.83,
+       "vbt_pf": 0.697,
+       "btpy_pf": 0.708,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 378,
+       "win_pct": 49.2,
+       "profit_factor": 0.572,
+       "net_usd": -826.5,
+       "expectancy_R": -0.219,
+       "max_dd_pct": -82.94,
+       "return_pct": -82.65,
+       "vbt_pf": 0.765,
+       "btpy_pf": 0.76,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 351,
+       "win_pct": 46.7,
+       "profit_factor": 0.597,
+       "net_usd": -785.4,
+       "expectancy_R": -0.21,
+       "max_dd_pct": -80.32,
+       "return_pct": -78.54,
+       "vbt_pf": 0.855,
+       "btpy_pf": 0.764,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 354,
+       "win_pct": 48.6,
+       "profit_factor": 0.651,
+       "net_usd": -726.99,
+       "expectancy_R": -0.177,
+       "max_dd_pct": -75.47,
+       "return_pct": -72.7,
+       "vbt_pf": 0.658,
+       "btpy_pf": 0.673,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 332,
+       "win_pct": 43.1,
+       "profit_factor": 0.551,
+       "net_usd": -815.94,
+       "expectancy_R": -0.245,
+       "max_dd_pct": -82.85,
+       "return_pct": -81.59,
+       "vbt_pf": 0.675,
+       "btpy_pf": 0.674,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 351,
+       "win_pct": 41.0,
+       "profit_factor": 0.448,
+       "net_usd": -915.48,
+       "expectancy_R": -0.341,
+       "max_dd_pct": -92.26,
+       "return_pct": -91.55,
+       "vbt_pf": 0.771,
+       "btpy_pf": 0.791,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 304,
+       "win_pct": 40.1,
+       "profit_factor": 0.575,
+       "net_usd": -795.05,
+       "expectancy_R": -0.25,
+       "max_dd_pct": -80.73,
+       "return_pct": -79.5,
+       "vbt_pf": 0.936,
+       "btpy_pf": 0.928,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 300,
+       "win_pct": 42.3,
+       "profit_factor": 0.712,
+       "net_usd": -656.53,
+       "expectancy_R": -0.166,
+       "max_dd_pct": -68.0,
+       "return_pct": -65.65,
+       "vbt_pf": 0.875,
+       "btpy_pf": 1.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 394,
+       "win_pct": 36.5,
+       "profit_factor": 0.493,
+       "net_usd": -900.76,
+       "expectancy_R": -0.282,
+       "max_dd_pct": -90.7,
+       "return_pct": -90.08,
+       "vbt_pf": 0.881,
+       "btpy_pf": 0.874,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 261,
+       "win_pct": 40.2,
+       "profit_factor": 0.567,
+       "net_usd": -731.57,
+       "expectancy_R": -0.242,
+       "max_dd_pct": -74.47,
+       "return_pct": -73.16,
+       "vbt_pf": 0.866,
+       "btpy_pf": 0.968,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 430,
+       "win_pct": 39.3,
+       "profit_factor": 0.597,
+       "net_usd": -897.53,
+       "expectancy_R": -0.25,
+       "max_dd_pct": -90.18,
+       "return_pct": -89.86,
+       "vbt_pf": 0.761,
+       "btpy_pf": 0.882,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 259,
+       "win_pct": 36.7,
+       "profit_factor": 0.299,
+       "net_usd": -922.09,
+       "expectancy_R": -0.481,
+       "max_dd_pct": -92.98,
+       "return_pct": -92.21,
+       "vbt_pf": 0.583,
+       "btpy_pf": 0.513,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 1568,
+      "win_pct": 39.9,
+      "profit_factor": 0.564,
+      "net_usd": -4897.06,
+      "expectancy_R": -0.196,
+      "return_pct": -34.98
+     },
+     "engines": {
+      "ours_pf": 0.564,
+      "vbt_pf": 0.884,
+      "btpy_pf": 1.075,
+      "agreement": "1/3",
+      "independent_pf>1": "1/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "COPPER"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "COPPER"
+      ],
+      "oos_survived": [
+       "COPPER"
+      ],
+      "survival": "1/1",
+      "verdict": "ROBUST"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 6,
+         "profit_factor": 0.579,
+         "net_usd": -24.35,
+         "max_dd_pct": -5.6
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 25,
+         "profit_factor": 0.359,
+         "net_usd": -165.88,
+         "max_dd_pct": -17.2
+        },
+        "total_folds": 19,
+        "considered_folds": 5,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.2,
+        "verdict": "overfit"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 33,
+         "profit_factor": 0.853,
+         "net_usd": -40.05,
+         "max_dd_pct": -10.3
+        },
+        "total_folds": 19,
+        "considered_folds": 5,
+        "profitable_folds": 2,
+        "profitable_fold_ratio": 0.4,
+        "verdict": "overfit"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 0.079,
+         "net_usd": -92.14,
+         "max_dd_pct": -7.6
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 0.234,
+         "net_usd": -54.9,
+         "max_dd_pct": -4.5
+        },
+        "total_folds": 19,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 8,
+         "profit_factor": 1.183,
+         "net_usd": 6.63,
+         "max_dd_pct": -2.0
+        },
+        "total_folds": 17,
+        "considered_folds": 2,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.5,
+        "verdict": "robust"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 14,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 13,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 4,
+         "profit_factor": 1.782,
+         "net_usd": 13.65,
+         "max_dd_pct": -1.7
+        },
+        "total_folds": 12,
+        "considered_folds": 1,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 1.0,
+        "verdict": "robust"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 22,
+         "profit_factor": 0.677,
+         "net_usd": -56.38,
+         "max_dd_pct": -9.6
+        },
+        "total_folds": 11,
+        "considered_folds": 4,
+        "profitable_folds": 3,
+        "profitable_fold_ratio": 0.75,
+        "verdict": "overfit"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 10,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 13,
+         "profit_factor": 0.482,
+         "net_usd": -70.1,
+         "max_dd_pct": -10.8
+        },
+        "total_folds": 12,
+        "considered_folds": 1,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.564,
+       "fee_+25%": 0.546,
+       "fee_+50%": 0.529,
+       "slip_2x": 0.405,
+       "slip_3x": 0.292,
+       "harsh": 0.268
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "CONSIDERATION",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 135,
+       "win_pct": 41.5,
+       "profit_factor": 0.519,
+       "net_usd": -401.75,
+       "expectancy_R": -0.184,
+       "max_dd_pct": -43.49,
+       "return_pct": -40.18,
+       "vbt_pf": 1.016,
+       "btpy_pf": 0.957,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 123,
+       "win_pct": 45.5,
+       "profit_factor": 0.723,
+       "net_usd": -254.02,
+       "expectancy_R": -0.111,
+       "max_dd_pct": -33.01,
+       "return_pct": -25.4,
+       "vbt_pf": 1.263,
+       "btpy_pf": 1.245,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 138,
+       "win_pct": 40.6,
+       "profit_factor": 0.568,
+       "net_usd": -419.5,
+       "expectancy_R": -0.19,
+       "max_dd_pct": -43.71,
+       "return_pct": -41.95,
+       "vbt_pf": 1.012,
+       "btpy_pf": 1.058,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 125,
+       "win_pct": 36.0,
+       "profit_factor": 0.468,
+       "net_usd": -474.31,
+       "expectancy_R": -0.25,
+       "max_dd_pct": -48.5,
+       "return_pct": -47.43,
+       "vbt_pf": 0.824,
+       "btpy_pf": 0.855,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 107,
+       "win_pct": 34.6,
+       "profit_factor": 0.426,
+       "net_usd": -427.78,
+       "expectancy_R": -0.254,
+       "max_dd_pct": -42.78,
+       "return_pct": -42.78,
+       "vbt_pf": 0.578,
+       "btpy_pf": 3.189,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 131,
+       "win_pct": 42.0,
+       "profit_factor": 0.481,
+       "net_usd": -423.52,
+       "expectancy_R": -0.205,
+       "max_dd_pct": -43.93,
+       "return_pct": -42.35,
+       "vbt_pf": 0.951,
+       "btpy_pf": 0.828,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 102,
+       "win_pct": 41.2,
+       "profit_factor": 0.656,
+       "net_usd": -275.36,
+       "expectancy_R": -0.15,
+       "max_dd_pct": -33.19,
+       "return_pct": -27.54,
+       "vbt_pf": 0.997,
+       "btpy_pf": 0.851,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 117,
+       "win_pct": 39.3,
+       "profit_factor": 0.515,
+       "net_usd": -418.3,
+       "expectancy_R": -0.225,
+       "max_dd_pct": -46.25,
+       "return_pct": -41.83,
+       "vbt_pf": 1.015,
+       "btpy_pf": 1.089,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 124,
+       "win_pct": 33.1,
+       "profit_factor": 0.473,
+       "net_usd": -463.48,
+       "expectancy_R": -0.244,
+       "max_dd_pct": -48.15,
+       "return_pct": -46.35,
+       "vbt_pf": 0.718,
+       "btpy_pf": 0.675,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 98,
+       "win_pct": 41.8,
+       "profit_factor": 0.553,
+       "net_usd": -332.91,
+       "expectancy_R": -0.199,
+       "max_dd_pct": -38.11,
+       "return_pct": -33.29,
+       "vbt_pf": 1.04,
+       "btpy_pf": 1.105,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 108,
+       "win_pct": 33.3,
+       "profit_factor": 0.401,
+       "net_usd": -479.64,
+       "expectancy_R": -0.295,
+       "max_dd_pct": -51.97,
+       "return_pct": -47.96,
+       "vbt_pf": 0.905,
+       "btpy_pf": 0.967,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 67,
+       "win_pct": 55.2,
+       "profit_factor": 1.384,
+       "net_usd": 164.94,
+       "expectancy_R": 0.121,
+       "max_dd_pct": -11.43,
+       "return_pct": 16.49,
+       "vbt_pf": 1.108,
+       "btpy_pf": 1.402,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "NATGAS": {
+       "trades": 98,
+       "win_pct": 43.9,
+       "profit_factor": 0.657,
+       "net_usd": -268.81,
+       "expectancy_R": -0.152,
+       "max_dd_pct": -29.53,
+       "return_pct": -26.88,
+       "vbt_pf": 0.638,
+       "btpy_pf": 0.768,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 95,
+       "win_pct": 36.8,
+       "profit_factor": 0.44,
+       "net_usd": -422.61,
+       "expectancy_R": -0.28,
+       "max_dd_pct": -46.24,
+       "return_pct": -42.26,
+       "vbt_pf": 1.018,
+       "btpy_pf": 1.001,
+       "indep_confirmed": true,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  },
+  "tall_pattern_height_filter": {
+   "style": "breakout",
+   "tf": "1h-4h",
+   "indicators": "high, low, close, atr_pct",
+   "long": "Range/close >= 0.055 (tall bar) and close breaks above bar high[1]",
+   "short": "Range/close >= 0.055 (tall bar) and close breaks below bar low[1]",
+   "desc": "Tall-pattern height filter: breakout only when event bar height-percent exceeds the historical median of ~5.5%",
+   "source": "encyclopedia_of_chart_patterns_2nd_ed_thomas_n_bulkowski -- Ch.60-63 Size and Volume Statistics tables 60.6-63.6",
+   "forward_test": false,
+   "results": {
+    "day": {
+     "total": {
+      "trades": 80,
+      "win_pct": 53.8,
+      "profit_factor": 1.055,
+      "net_usd": 41.57,
+      "expectancy_R": 0.034,
+      "return_pct": 0.3
+     },
+     "engines": {
+      "ours_pf": 1.055,
+      "vbt_pf": 1.391,
+      "btpy_pf": 1.477,
+      "agreement": "3/3",
+      "independent_pf>1": "2/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [],
+     "walk_forward": {
+      "is_picked": [
+       "WTI"
+      ],
+      "oos_survived": [],
+      "survival": "0/1",
+      "verdict": "OVERFIT"
+     },
+     "rolling_wfo": {
+      "verdict": "insufficient_history",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 43,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 40,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 32,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 27,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 26,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 29,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 1.055,
+       "fee_+25%": 1.052,
+       "fee_+50%": 1.049,
+       "slip_2x": 0.866,
+       "slip_3x": 0.778,
+       "harsh": 0.768
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "DROP",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 1,
+       "win_pct": 0.0,
+       "profit_factor": 0.0,
+       "net_usd": -21.0,
+       "expectancy_R": -1.05,
+       "max_dd_pct": -2.33,
+       "return_pct": -2.1,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 13,
+       "win_pct": 76.9,
+       "profit_factor": 2.729,
+       "net_usd": 95.14,
+       "expectancy_R": 0.358,
+       "max_dd_pct": -3.39,
+       "return_pct": 9.51,
+       "vbt_pf": 0.967,
+       "btpy_pf": 1.406,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 15,
+       "win_pct": 60.0,
+       "profit_factor": 1.12,
+       "net_usd": 13.16,
+       "expectancy_R": 0.051,
+       "max_dd_pct": -5.7,
+       "return_pct": 1.32,
+       "vbt_pf": 0.945,
+       "btpy_pf": 0.926,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "WTI": {
+       "trades": 27,
+       "win_pct": 51.9,
+       "profit_factor": 1.148,
+       "net_usd": 41.78,
+       "expectancy_R": 0.09,
+       "max_dd_pct": -10.81,
+       "return_pct": 4.18,
+       "vbt_pf": 1.937,
+       "btpy_pf": 1.763,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 1,
+       "win_pct": 0.0,
+       "profit_factor": 0.0,
+       "net_usd": -21.05,
+       "expectancy_R": -1.052,
+       "max_dd_pct": -2.1,
+       "return_pct": -2.1,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 22,
+       "win_pct": 45.5,
+       "profit_factor": 0.815,
+       "net_usd": -45.01,
+       "expectancy_R": -0.09,
+       "max_dd_pct": -14.06,
+       "return_pct": -4.5,
+       "vbt_pf": 1.325,
+       "btpy_pf": 1.76,
+       "indep_confirmed": true,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 1,
+       "win_pct": 0.0,
+       "profit_factor": 0.0,
+       "net_usd": -21.46,
+       "expectancy_R": -1.073,
+       "max_dd_pct": -3.21,
+       "return_pct": -2.15,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    },
+    "swing": {
+     "total": {
+      "trades": 233,
+      "win_pct": 46.8,
+      "profit_factor": 0.835,
+      "net_usd": -254.24,
+      "expectancy_R": -0.059,
+      "return_pct": -1.82
+     },
+     "engines": {
+      "ours_pf": 0.835,
+      "vbt_pf": 0.966,
+      "btpy_pf": 1.023,
+      "agreement": "1/3",
+      "independent_pf>1": "1/2",
+      "confirmation": "per-pair (see per_pair[*].indep_confirmed); pooled shown here"
+     },
+     "gate_passing_pairs": [
+      "BCOUSD"
+     ],
+     "walk_forward": {
+      "is_picked": [
+       "BCOUSD"
+      ],
+      "oos_survived": [
+       "BCOUSD"
+      ],
+      "survival": "1/1",
+      "verdict": "ROBUST"
+     },
+     "rolling_wfo": {
+      "verdict": "overfit",
+      "method": "rolling",
+      "per_pair": {
+       "EURUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDJPY": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "GBPUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCHF": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "AUDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "USDCAD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 19,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NZDUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 17,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAUUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 14,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "XAGUSD": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 13,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "BCOUSD": {
+        "stitched_oos": {
+         "trades": 7,
+         "profit_factor": 0.4,
+         "net_usd": -23.8,
+         "max_dd_pct": -1.9
+        },
+        "total_folds": 12,
+        "considered_folds": 2,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "overfit"
+       },
+       "WTI": {
+        "stitched_oos": {
+         "trades": 5,
+         "profit_factor": 0.691,
+         "net_usd": -7.61,
+         "max_dd_pct": -0.3
+        },
+        "total_folds": 11,
+        "considered_folds": 3,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 0.33,
+        "verdict": "overfit"
+       },
+       "COPPER": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 11,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       },
+       "NATGAS": {
+        "stitched_oos": {
+         "trades": 20,
+         "profit_factor": 1.193,
+         "net_usd": 30.88,
+         "max_dd_pct": -7.4
+        },
+        "total_folds": 10,
+        "considered_folds": 1,
+        "profitable_folds": 1,
+        "profitable_fold_ratio": 1.0,
+        "verdict": "robust"
+       },
+       "USDMXN": {
+        "stitched_oos": {
+         "trades": 0,
+         "profit_factor": null,
+         "net_usd": 0.0,
+         "max_dd_pct": 0.0
+        },
+        "total_folds": 12,
+        "considered_folds": 0,
+        "profitable_folds": 0,
+        "profitable_fold_ratio": 0.0,
+        "verdict": "insufficient_history"
+       }
+      }
+     },
+     "stress": {
+      "scenarios": {
+       "base": 0.835,
+       "fee_+25%": 0.832,
+       "fee_+50%": 0.828,
+       "slip_2x": 0.692,
+       "slip_3x": 0.59,
+       "harsh": 0.575
+      },
+      "verdict_scenario": "harsh",
+      "survive_pf": 1.0,
+      "survives": false,
+      "verdict": "FRAGILE"
+     },
+     "verdict": "CONSIDERATION",
+     "per_pair": {
+      "EURUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDJPY": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "GBPUSD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCHF": {
+       "trades": 1,
+       "win_pct": 100.0,
+       "profit_factor": null,
+       "net_usd": 1.24,
+       "expectancy_R": 0.062,
+       "max_dd_pct": -0.55,
+       "return_pct": 0.12,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "AUDUSD": {
+       "trades": 2,
+       "win_pct": 0.0,
+       "profit_factor": 0.0,
+       "net_usd": -21.41,
+       "expectancy_R": -0.536,
+       "max_dd_pct": -2.14,
+       "return_pct": -2.14,
+       "vbt_pf": null,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDCAD": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NZDUSD": {
+       "trades": 1,
+       "win_pct": 0.0,
+       "profit_factor": 0.0,
+       "net_usd": -1.51,
+       "expectancy_R": -0.075,
+       "max_dd_pct": -0.15,
+       "return_pct": -0.15,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAUUSD": {
+       "trades": 1,
+       "win_pct": 100.0,
+       "profit_factor": null,
+       "net_usd": 8.75,
+       "expectancy_R": 0.438,
+       "max_dd_pct": -0.86,
+       "return_pct": 0.88,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "XAGUSD": {
+       "trades": 31,
+       "win_pct": 41.9,
+       "profit_factor": 0.774,
+       "net_usd": -40.33,
+       "expectancy_R": -0.061,
+       "max_dd_pct": -8.56,
+       "return_pct": -4.03,
+       "vbt_pf": 0.67,
+       "btpy_pf": 0.766,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "BCOUSD": {
+       "trades": 33,
+       "win_pct": 60.6,
+       "profit_factor": 1.837,
+       "net_usd": 116.18,
+       "expectancy_R": 0.172,
+       "max_dd_pct": -4.28,
+       "return_pct": 11.62,
+       "vbt_pf": 2.265,
+       "btpy_pf": 1.491,
+       "indep_confirmed": true,
+       "gate_pass": true
+      },
+      "WTI": {
+       "trades": 50,
+       "win_pct": 48.0,
+       "profit_factor": 0.925,
+       "net_usd": -25.42,
+       "expectancy_R": -0.018,
+       "max_dd_pct": -16.55,
+       "return_pct": -2.54,
+       "vbt_pf": 0.963,
+       "btpy_pf": 1.443,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "COPPER": {
+       "trades": 2,
+       "win_pct": 50.0,
+       "profit_factor": 0.229,
+       "net_usd": -16.19,
+       "expectancy_R": -0.402,
+       "max_dd_pct": -2.37,
+       "return_pct": -1.62,
+       "vbt_pf": 0.0,
+       "btpy_pf": 0.0,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "NATGAS": {
+       "trades": 112,
+       "win_pct": 43.8,
+       "profit_factor": 0.672,
+       "net_usd": -275.54,
+       "expectancy_R": -0.136,
+       "max_dd_pct": -31.68,
+       "return_pct": -27.55,
+       "vbt_pf": 0.888,
+       "btpy_pf": 0.879,
+       "indep_confirmed": false,
+       "gate_pass": false
+      },
+      "USDMXN": {
+       "trades": 0,
+       "win_pct": null,
+       "profit_factor": null,
+       "net_usd": 0.0,
+       "expectancy_R": null,
+       "max_dd_pct": 0.0,
+       "return_pct": 0.0,
+       "vbt_pf": null,
+       "btpy_pf": null,
+       "indep_confirmed": false,
+       "gate_pass": false
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forex Trade -- PnL</title>
+<link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+<link rel="stylesheet" href="/shared/theme.css?v={{ASSET_V}}">
+<link rel="stylesheet" href="static/style.css?v={{ASSET_V}}">
+</head>
+<!-- PnL = a blue analytics axis (the cards carry their own mode colours: Paper amber, Live red). -->
+<body class="view-pnl" data-view="pnl">
+<!-- SAME flat nav as the other pages; PnL is active. The chart-view links navigate to /?view=X. -->
+<nav class="navbar">
+  <span class="brand">FOREX</span>
+  <div class="views">
+    <a href="/?view=backtest" data-view="backtest">Backtest</a>
+    <a href="/results">Results</a>
+    <a href="/?view=paper" data-view="paper">Paper</a>
+    <a href="/?view=live"  data-view="live">Live</a>
+    <a href="/pnl" class="active">PnL</a>
+  </div>
+  <a href="https://josoka.com" class="site" target="_blank" rel="noopener"><img src="/shared/josoka-flame.webp" alt="Josoka">josoka.com</a>
+</nav>
+<header class="results-header">
+  <h1>PNL <span class="subtitle">paper + live at a glance</span></h1>
+</header>
+<main class="pnl-main">
+  <!-- Two side-by-side mode cards (stack on mobile), filled by pnl.js. -->
+  <div class="pnlgrid" id="pnlgrid"></div>
+</main>
+<script src="static/pnl.js?v={{ASSET_V}}"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forex Trade</title>
+<!-- Standalone FOREX chart server: serves at ROOT (no /chart/ prefix), so NO <base href> --
+     a base would prefix every relative asset/api URL and 404 them (that was the sister-lab hub
+     setup). lightweight-charts is bundled LOCALLY (static/vendor) -- no CDN dependency, the
+     lib always loads over Tailscale. -->
+<link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+<script src="static/vendor/lightweight-charts.standalone.production.js"></script>
+<link rel="stylesheet" href="/shared/theme.css?v={{ASSET_V}}">
+<link rel="stylesheet" href="static/style.css?v={{ASSET_V}}">
+</head>
+<body data-view="chart">
+<!-- Flat nav, four plain links: Backtest / Results / Paper / Live. Backtest = local parquet
+     (green); Paper = Ostium sim (amber); Live = Ostium mainnet (red) -- the active view sets the
+     whole-page accent so real money is unmistakable. chart.js intercepts the data-view links for
+     instant switching + ?view= deep-links; Results is a real page nav (/results). -->
+<nav class="navbar">
+  <span class="brand">FOREX</span>
+  <div class="views" id="views">
+    <a href="/?view=backtest" data-view="backtest">Backtest</a>
+    <a href="/results">Results</a>
+    <a href="/?view=paper" data-view="paper">Paper</a>
+    <a href="/?view=live"  data-view="live">Live</a>
+    <a href="/pnl">PnL</a>
+  </div>
+  <a href="https://josoka.com" class="site" target="_blank" rel="noopener"><img src="/shared/josoka-flame.webp" alt="Josoka">josoka.com</a>
+</nav>
+<!-- ONE control bar: instrument buttons (left, wrap) + candle-duration buttons (pinned right).
+     Kept off the chart window so nothing overlays the canvas. Pairs Ostium doesn't list are
+     hidden by buildCoins() in the Paper/Live views. -->
+<div class="controls">
+  <div class="coins" id="coins"></div>
+  <div class="itabs" id="ivs"></div>
+</div>
+<main>
+  <div class="chartwrap">
+    <div id="chartbox"></div>
+    <button id="jumpbtn" onclick="jumpNow()">&#9654; Now</button>
+    <div class="legend" id="legend"></div>
+  </div>
+  <!-- Right info panel, drag-resizable on its left edge (same pattern as sister-lab's trader sidebar).
+       Content is view-aware (chart.js renderPanel): Backtest -> results/trades; Paper/Live ->
+       account + open/closed positions. Placeholders today; wired when the Ostium trader lands. -->
+  <aside class="side" id="sidebar">
+    <div class="resize-handle" id="resizer"></div>
+    <div class="panel-body" id="panel"></div>
+  </aside>
+</main>
+<script src="static/chart.js?v={{ASSET_V}}"></script>
+</body>
+</html>

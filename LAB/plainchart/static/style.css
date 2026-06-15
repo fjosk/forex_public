@@ -1,0 +1,200 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: #0d1017; color: #d1d4dc;
+  font: 13px/1.4 -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  display: flex; flex-direction: column; height: 100vh;
+  overflow: hidden;  /* page never scrolls; the chart area absorbs the space */
+}
+/* Whole-page accent follows the active VIEW (purpose, not data source). Backtest = local parquet
+   (no money), Paper = Ostium live sim, Live = Ostium mainnet REAL money -- the colour escalates
+   green -> amber -> red so the real-money view is unmistakable. Default green until JS sets it. */
+body { --accent: #26a69a; }
+body.view-backtest { --accent: #26a69a; }   /* green */
+body.view-paper    { --accent: #ff9800; }   /* amber */
+body.view-live     { --accent: #ef5350; }   /* red   */
+
+/* Navbar view links: the active purpose-view underlines + colours in the accent. */
+.navbar .views { display: flex; align-items: center; gap: 4px; }
+.navbar .views a {
+  padding: 4px 10px; text-decoration: none; color: #9aa4b2; border-bottom: 2px solid transparent;
+}
+.navbar .views a:hover { color: #d1d4dc; }
+.navbar .views a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ONE control bar: instrument buttons fill the left and wrap; candle-duration is pinned to the
+   far right. It sits ABOVE the chart and never overlays the canvas. The accent underline tracks
+   the active view. */
+.controls {
+  display: flex; align-items: center; gap: 12px;
+  padding: 7px 14px; border-bottom: 2px solid var(--accent); background: #11151d;
+}
+.coins  { flex: 1; display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }  /* pairs, left, wrap */
+.itabs  { flex: none; display: flex; gap: 4px; }                              /* candle duration, right */
+
+button {
+  background: #1a2030; color: #9aa4b2; border: 1px solid #2a2e39;
+  padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;
+}
+button:hover { background: #222a3d; color: #d1d4dc; }
+button.on { background: var(--accent); color: #07101f; border-color: var(--accent); font-weight: 600; }
+
+main { flex: 1; min-height: 0; display: flex; overflow: hidden; }
+.chartwrap { flex: 1; min-width: 0; position: relative; padding: 10px 14px; }
+#chartbox { width: 100%; height: 100%; }
+
+/* Right info panel -- drag-resizable on its left edge (handle look from webcore/theme.css). */
+.side {
+  width: 340px; min-width: 220px; max-width: 640px; flex: none;
+  position: relative; border-left: 1px solid #1c2230; background: #0f131b;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.side .resize-handle { position: absolute; left: 0; top: 0; bottom: 0; }  /* overlay the left edge */
+.panel-body { flex: 1; overflow-y: auto; }
+
+/* Panel sections (view-aware: results/trades for Backtest, account+positions for Paper/Live). */
+.acct { padding: 10px 12px; border-bottom: 1px solid #1c2230; }
+.acct .big { font-size: 18px; font-weight: 700; color: #d1d4dc; }
+.psec { border-bottom: 1px solid #1c2230; }
+.psec h3 {
+  font-size: 11px; text-transform: uppercase; color: #787b86;
+  padding: 8px 12px; letter-spacing: .5px; margin: 0;
+}
+.psec .body { padding: 4px 12px 12px; }
+.pdim { color: #6b7280; font-size: 12px; }
+
+#jumpbtn {
+  position: absolute; right: 14px; bottom: 14px; z-index: 5;
+  background: #1a2030cc; backdrop-filter: blur(2px);
+}
+.legend {
+  position: absolute; left: 10px; top: 8px; z-index: 5;
+  font-size: 12px; color: #9aa4b2; pointer-events: none;
+  text-shadow: 0 1px 2px #000;
+}
+.legend b { color: #d1d4dc; }
+.legend .up { color: #26a69a; }
+.legend .down { color: #ef5350; }
+.legend .e20 { color: #ffc107; }   /* EMA20 = bright yellow, matches the trader view */
+.legend .e50 { color: #ff9800; }
+
+/* ===== /results page -- the full backtest record as a sortable table. Scaled for thousands of
+   rows (sticky head, client sort/filter, lazy per-pair). Scoped to .results-* + #tbl + .filters so
+   none of the chart rules above are touched. Ported from sister-lab's results styling. ===== */
+.results-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 8px 14px; border-bottom: 1px solid #1c2230; background: #11151d;
+}
+.results-header h1 { font-size: 15px; margin: 0; letter-spacing: 1px; color: var(--accent); }
+.results-header .subtitle { color: #6b7280; font-size: 11px; font-weight: 400; letter-spacing: 0; }
+.results-header .spacer { flex: 1; }
+
+.filters {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 7px 14px; border-bottom: 1px solid #1c2230; background: #0f131b;
+}
+.filters .sep { width: 1px; align-self: stretch; background: #1c2230; margin: 0 4px; }
+.filters .slabel { color: #6b7280; font-size: 11px; }
+.filters .spacer { flex: 1; }
+.filters input[type="search"] {
+  background: #141a26; border: 1px solid #2a2e39; color: #d1d4dc;
+  padding: 5px 10px; border-radius: 5px; font-size: 12px; min-width: 240px;
+}
+.filters .fgroup { display: flex; gap: 4px; }
+.filters .fgroup button { padding: 4px 10px; }
+.filters .chk { color: #9aa4b2; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+
+.results-main { flex: 1; min-height: 0; padding: 10px 14px; display: flex; }
+.tablewrap {
+  flex: 1; min-height: 0; overflow: auto;
+  background: #0c1018; border: 1px solid #1c2230; border-radius: 6px;
+}
+.tablewrap::-webkit-scrollbar { width: 9px; height: 9px; }
+.tablewrap::-webkit-scrollbar-thumb { background: #2a2e39; border-radius: 4px; }
+
+#tbl { border-collapse: collapse; width: 100%; font-size: 12px; }
+#tbl th, #tbl td { padding: 5px 9px; white-space: nowrap; border-bottom: 1px solid #141a26; }
+#tbl th {
+  position: sticky; top: 0; z-index: 2; background: #11151d; color: #9aa4b2;
+  font-weight: 600; cursor: pointer; user-select: none; text-align: left;
+}
+#tbl th:hover { color: #d1d4dc; }
+#tbl th.r { text-align: right; } #tbl th.c { text-align: center; }
+#tbl th.sort-a::after { content: " \25B2"; color: var(--accent); }
+#tbl th.sort-d::after { content: " \25BC"; color: var(--accent); }
+#tbl td.r { text-align: right; font-variant-numeric: tabular-nums; }
+#tbl td.c { text-align: center; }
+#tbl td.l:first-child { color: #d1d4dc; font-weight: 600; }
+#tbl td.empty { text-align: center; padding: 24px; }
+
+#tbl tr.row { cursor: pointer; }
+#tbl tr.row:hover td { background: #141a26; }
+#tbl tr.row.fwd td:first-child { box-shadow: inset 3px 0 0 #26a69a; }  /* forward-test marker */
+#tbl tr.row.open td { background: #161d2e; }
+
+/* metric coloring -- shared vocabulary with the per-pair sub-table */
+.good { color: #26a69a; } .warn { color: #e0a32e; } .bad { color: #ef5350; }
+.pos { color: #26a69a; } .neg { color: #ef5350; } .dim { color: #6b7280; }
+
+/* ===== /pnl page -- two glanceable mode cards (Paper | Live), one combined view. The page accent
+   is a neutral blue (analytics axis); each card carries its own mode colour. ===== */
+body.view-pnl { --accent: #3b82f6; }                 /* blue */
+.pnl-main { flex: 1; min-height: 0; padding: 14px; overflow: auto; }
+.pnlgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 920px; }
+.pnlcard {
+  background: #0f131b; border: 1px solid #1c2230; border-top: 3px solid var(--accent);
+  border-radius: 8px; padding: 14px 16px;
+}
+.pnlcard.mode-paper { --accent: #ff9800; }           /* amber */
+.pnlcard.mode-live  { --accent: #ef5350; }           /* red   */
+.pnlhead {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+  color: var(--accent);
+}
+.pnlhead .badge { font-size: 10px; font-weight: 600; color: #6b7280; text-transform: none; letter-spacing: 0; }
+.pnlbig { font-size: 30px; font-weight: 700; color: #d1d4dc; line-height: 1.1; }
+.pnlsub { font-size: 13px; margin: 3px 0 14px; }
+.statrow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.stat { background: #11151d; border: 1px solid #1c2230; border-radius: 6px; padding: 8px 6px; text-align: center; }
+.stat .k { font-size: 10px; text-transform: uppercase; color: #6b7280; letter-spacing: .5px; }
+.stat .v { font-size: 15px; font-weight: 600; margin-top: 3px; }
+.pnlempty { padding: 16px 0; }
+
+#tbl tr.detail td { background: #0a0d14; padding: 10px 14px; }
+.rules { display: flex; flex-direction: column; gap: 3px; margin-bottom: 8px; line-height: 1.5; }
+.rules a { color: #5b9bd5; }
+.coinsbox { color: #6b7280; }
+.coins-tbl { border-collapse: collapse; font-size: 11px; }
+.coins-tbl th, .coins-tbl td { padding: 3px 10px; border-bottom: 1px solid #141a26; }
+.coins-tbl th { color: #6b7280; font-weight: 600; text-align: left; }
+.coins-tbl th.r, .coins-tbl td.r { text-align: right; font-variant-numeric: tabular-nums; }
+.coins-tbl th.c, .coins-tbl td.c { text-align: center; }
+
+@media (max-width: 860px) {
+  .results-header { flex-wrap: wrap; gap: 8px 10px; }
+  .results-main { padding: 8px; }
+  /* font-size >=16px stops iOS Safari from auto-zooming when the search box is focused. */
+  .filters input[type="search"] { min-width: 140px; flex: 1 1 100%; font-size: 16px; }
+  .filters .fgroup button, .filters .chk { padding: 8px 12px; }   /* finger-sized targets */
+  .tablewrap { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }  /* momentum + no scroll-chaining */
+  .pnl-main { padding: 10px; }
+  .pnlgrid { grid-template-columns: 1fr; gap: 10px; }   /* Paper over Live (stacked) */
+  .statrow { grid-template-columns: repeat(3, 1fr); }   /* 5 stats wrap 3 + 2 */
+}
+
+@media (max-width: 860px) {
+  .controls { flex-wrap: wrap; gap: 8px 10px; padding: 6px 12px; }
+  .coins { flex: 1 1 100%; }             /* pairs take their own full row */
+  .itabs { flex: none; }                 /* candle duration drops below, still grouped */
+  main { flex-direction: column; flex: none; overflow: visible; }  /* chart over panel, page scrolls */
+  .chartwrap { flex: none; height: 60vh; padding: 8px 12px; }
+  .side { width: 100%; max-width: none; border-left: none; border-top: 1px solid #1c2230; overflow: visible; }
+  .panel-body { overflow: visible; }
+  .resize-handle { display: none; }      /* col-resize drag is meaningless on touch */
+  html, body { height: auto; overflow: visible; }
+  body { min-height: 100vh; }
+  /* Finger-sized tap targets for the nav links + chart-control buttons on touch screens. */
+  .navbar .views a { padding: 9px 13px; }
+  .controls button { padding: 8px 12px; }
+}

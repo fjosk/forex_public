@@ -1,0 +1,11 @@
+{
+ "realized_pnl": 0,
+ "fees_paid": 0,
+ "open_positions": [],
+ "closed_trades": [],
+ "network": "testnet",
+ "unrealized_pnl": 0.0,
+ "starting_balance": 10000.0,
+ "equity": 10000.0,
+ "updated": 1780814175
+}

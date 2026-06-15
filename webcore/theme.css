@@ -1,0 +1,125 @@
+/* ============================================================================
+   sister-lab dashboards -- single-source design system (served at /shared/theme.css).
+   All three views (trader '/', backtest '/lab/', plain chart '/chart/') link this for a
+   CONSISTENT dark theme + shared components. Each view sets <body data-view="..."> which
+   picks a DISTINCT --accent (and a view name), so the dominant accent colour + the header
+   title tell you instantly which dashboard you are on while everything else stays uniform.
+   ============================================================================ */
+:root {
+  --bg: #0a0e16;
+  --panel: #11151d;       /* header / sticky bars            */
+  --panel-2: #0f131b;     /* coin row                        */
+  --panel-3: #0c1018;     /* side panel / strat bar          */
+  --border: #1c2230;
+  --fg: #d1d4dc;
+  --muted: #6b7280;
+  --muted-2: #8b94a3;
+  --btn-bg: #1a2030;
+  --btn-bg-hover: #222a3d;
+  --btn-border: #2a2e39;
+  --up: #26a69a;          /* gains / long  (matches candle up)   */
+  --down: #ef5350;        /* losses / short (matches candle down) */
+  --font: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius: 5px;
+  --accent: #3b82f6;      /* default; per-view overrides below */
+}
+
+/* --- per-view identity: the instant "where am I" tell ------------------------ */
+body[data-view="trader"]   { --accent: #3b82f6; }  /* blue  */
+body[data-view="backtest"] { --accent: #f5a623; }  /* amber */
+body[data-view="chart"]    { --accent: #34d399; }  /* green */
+
+/* --- base ------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 13px/1.4 var(--font);
+  display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+}
+.spacer { flex: 1; }
+.dim { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+/* --- shared top nav (the 3-view switcher) ----------------------------------- */
+.navbar {
+  display: flex; align-items: center; position: relative;  /* anchor the centred site link */
+  background: #0b0e14; border-bottom: 1px solid var(--border);
+  font: 600 13px/1 var(--font); flex: none;
+}
+/* Josoka brand link, absolutely centered in the nav row so it stays dead-center in every
+   viewport WITHOUT a second row and independent of the left-aligned brand+view links. Opens
+   the public site in a new tab. Overrides the .navbar a padding/border so centering is exact. */
+/* Josoka brand font (self-hosted, dependency-free) -- ties the wordmark to josoka.com's identity. */
+@font-face {
+  font-family: "Manrope";
+  src: url("/shared/Manrope-VF.ttf") format("truetype");
+  font-weight: 200 800; font-display: swap;
+}
+.navbar a.site {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 0; border-bottom: 0; white-space: nowrap;
+  font-family: "Manrope", var(--font); font-weight: 800; letter-spacing: 0.5px;
+  text-transform: uppercase;  /* JOSOKA.COM */
+  color: #fff;  /* dark header bar -> pure white wordmark */
+}
+.navbar a.site img { height: 1.3em; width: auto; display: block; }  /* flame mark, scales with the text */
+.navbar a.site:hover { color: #fff; opacity: 0.85; }
+/* Below the mobile breakpoint the brand+links fill the row, so an absolutely centered link
+   would overlap them. Drop out of absolute positioning, let the nav wrap, and pin josoka.com as
+   a full-width centered FIRST line -- still one continuous nav (no separate banner row), centered. */
+@media (max-width: 860px) {
+  .navbar { flex-wrap: wrap; justify-content: center; }
+  .navbar a.site {
+    position: static; left: auto; top: auto; transform: none;
+    order: -1; flex: 0 0 100%; text-align: center; padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+  }
+}
+.navbar a {
+  padding: 11px 16px; color: var(--muted-2); text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.navbar a:hover { color: var(--fg); }
+.navbar a.active { color: #fff; border-bottom-color: var(--accent); }  /* accent = current view */
+/* Umbrella wordmark before the view links -- the monorepo brand. Neutral (not the per-view accent)
+   because it spans all 3 dashboards (Trader = Hyperliquid; Backtest + Plain Chart = Binance lab data,
+   so a "Hyperliquid" wordmark up here would mislabel them). Per-view "Hyperliquid" lives in the
+   trader's own header bar. */
+.navbar .brand { display: flex; align-items: center; padding: 0 16px; font-weight: 800;
+  letter-spacing: 2px; color: var(--fg); border-right: 1px solid var(--border); white-space: nowrap; }
+
+/* --- header / title convention: accent dot + VIEW NAME + sub-label ----------- */
+header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 8px 14px; border-bottom: 1px solid var(--border); background: var(--panel);
+  flex: none;
+}
+header h1, header .title {
+  font-size: 15px; margin: 0; letter-spacing: 1px; font-weight: 700;
+  color: var(--fg); display: flex; align-items: center; gap: 8px; text-transform: uppercase;
+}
+header h1::before, header .title::before {
+  content: ""; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); flex: none;
+}
+header .subtitle { color: var(--muted-2); font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+/* --- buttons / pills (active = the view accent) ----------------------------- */
+button, .btn {
+  background: var(--btn-bg); color: var(--muted-2); border: 1px solid var(--btn-border);
+  padding: 5px 11px; border-radius: var(--radius); cursor: pointer; font-size: 12px;
+}
+button:hover, .btn:hover { background: var(--btn-bg-hover); color: var(--fg); }
+button.on, .btn.on, button.active, .btn.active {
+  background: var(--accent); color: #07101f; border-color: var(--accent); font-weight: 600;
+}
+
+/* --- drag handle for resizable side panels (trader sidebar + backtest panel) ----------------
+   Shared LOOK only (width/cursor/hover-accent). Placement differs by context: the trader overlays
+   it absolutely on the sidebar's left edge; the backtest uses it as an in-flow flex column between
+   chart and panel (the panel's innerHTML is rewritten on every render, so a child handle would be
+   wiped). Each view adds its own positioning. */
+.resize-handle { flex: none; width: 5px; cursor: col-resize; z-index: 10; }
+.resize-handle:hover { background: var(--accent); opacity: .5; }

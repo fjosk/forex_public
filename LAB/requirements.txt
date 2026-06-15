@@ -1,0 +1,21 @@
+# FOREX lab Python dependencies. Install into /home/user/global-venv:
+#   /home/user/global-venv/bin/pip3 install -r requirements.txt
+#
+# histdata: HistData.com generic-ASCII downloader (handles the per-request token
+#   handshake). Pinned because the free download path scrapes the site and a package
+#   update could be the thing that adapts to (or breaks on) a site change.
+histdata==1.1
+
+# Conversion + resampling to parquet (download.py needs only histdata; these are for
+# the next pipeline step, convert.py). Already present in global-venv via sister-lab/LAB.
+pandas
+pyarrow
+numpy==2.4.6
+
+# Backtest gauntlet (LAB/backtest/): the engine + the two INDEPENDENT cross-confirmation engines
+# (cross_engines.py re-prices our signals on vectorbt + backtesting.py -- an edge must clear both,
+# the robustness floor). Pinned so the cross-engine PFs are reproducible. These run in global-venv,
+# NOT FOREX/.venv (that one is the dukascopy + ostium-python-sdk venv, kept separate because its dep
+# tree downgrades websockets / pulls an obsolete asyncio shim; see CLAUDE.md).
+vectorbt==1.0.0
+backtesting==0.6.5

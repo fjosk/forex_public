@@ -1,0 +1,24 @@
+{
+ "generated": 1780817055,
+ "gate": "PF>=1.2 & net>$100 & maxDD<30% & trades>=30",
+ "note": "gate-only pre-filter (no independent-confirm/wfo/stress); survivors advance to the full gauntlet. Over-inclusive by design.",
+ "n_screened_cells": 12,
+ "n_survivor_cells": 0,
+ "pairs": [
+  "EURUSD",
+  "USDJPY",
+  "GBPUSD",
+  "USDCHF",
+  "AUDUSD",
+  "USDCAD",
+  "NZDUSD",
+  "XAUUSD",
+  "XAGUSD",
+  "BCOUSD",
+  "WTI",
+  "COPPER",
+  "NATGAS",
+  "USDMXN"
+ ],
+ "survivors": []
+}
