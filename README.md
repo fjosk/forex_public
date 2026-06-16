@@ -441,3 +441,5 @@ sound, the test was fair, and the honest answer was "no."
   On-chain/DeFi trading carries additional smart-contract, oracle, and self-custody risks.
 - **The live trader is experimental** and ships with real-money order placement disabled by
   default. If you choose to enable it, you do so at your own risk; start on testnet.
+
+Josoka.com
